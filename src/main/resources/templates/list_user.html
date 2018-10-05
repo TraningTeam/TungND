@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<title>List user</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<body style="padding: 20px">
+<div th:replace="header::header"></div>
+<p>Danh sách thẻ bảo hiểm</p>
+<form method="GET" th:action="@{/listUser}">
+    <div style="margin-left: 10px">
+        <p>Tên công ty</p>
+        <select th:name="company_id" id="company_internal_id">
+            <option th:each="company:${company_list}" th:value="${company.companyInternalId}"
+                    th:text="${company.companyName}"></option>
+        </select>
+    </div>
+    <br/>
+    <strong>Thông tin tìm kiếm</strong>
+    <table style="border: 1px solid black; padding: 14px">
+        <tr>
+            <td>
+                <label>Tên người sử dụng</label>
+            </td>
+            <td>
+                <input type="text" th:name="user_full_name" th:value="${user_full_name}" id="user_full_name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Mã số thẻ bảo hiểm</label>
+            </td>
+            <td>
+                <input type="text" th:name="insurance_number" th:value="${insurance_number}" id="insurance_number"/>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label>Nơi đăng ký</label>
+            </td>
+            <td>
+                <input type="text" th:name="place_of_register" th:value="${place_of_register}" id="place_of_register"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <input style="display: none" th:name="action" th:value="search"/>
+                <input style="margin-top: 10px; text-align: center" type="submit" value="Tìm kiếm"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<table width="100%">
+    <tr>
+        <td><input type="button" value="Đăng ký" onclick="location.href='/addUser'"/></td>
+        <td><input type="button" value="Export CSV"/></td>
+    </tr>
+
+</table>
+<table width="100%" border="1">
+    <tr>
+        <th>Tên người sử dụng
+            <button>?</button>
+            <button>?</button>
+        </th>
+        <th>Giới tính</th>
+        <th>Ngày sinh</th>
+        <th>Mã số thẻ bảo hiểm</th>
+        <th>Kỳ hạn</th>
+        <th>Nơi đăng ký KCB</th>
+    </tr>
+    <tr th:each="user:${user_list}">
+        <td th:text="${user.userFullName}"></td>
+        <td th:text="${user.userSexDivision}"></td>
+        <td th:text="${#dates.format(user.birthDate, 'dd-MM-yyyy')}"></td>
+        <td th:text="${user.insurance.insuranceNumber}"></td>
+        <td th:text="${#dates.format(user.insurance.insuranceStartDate,'dd-MM-yyyy')}
+                    +'~'
+                    +${#dates.format(user.insurance.insuranceEndDate,'dd-MM-yyyy')}"></td>
+        <td th:text="${user.insurance.placeOfRegister}"></td>
+    </tr>
+</table>
+<a href="/">&lt;&lt;</a>
+<script>
+    $("#company_internal_id").change(function () {
+        $("#user_full_name").html("");
+        $("#insurance_number").html("");
+        $("#place_of_register").html("");
+    })
+</script>
+</body>
+</html>

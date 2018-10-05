@@ -1,0 +1,177 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<title>Add user</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+    body {
+        width: 100%;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    .small > td {
+        padding-bottom: 1000px;
+        padding-right: 20px;
+    }
+
+    #main {
+        padding-top: 20px;
+        margin-left: 100px;
+    }
+
+    #div_button {
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    button {
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+</style>
+<body>
+<div th:replace="header::header"></div>
+<div id="main"><p>Thêm mới thông tin thẻ bảo hiểm</p>
+    <p></p>
+    <form method="POST" action="/addUser">
+        <table>
+            <tr>
+                <td><label>Mã số thẻ bảo hiểm</label></td>
+                <td><input type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td><label>Họ và Tên</label></td>
+                <td><input type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td><label>Mật khẩu</label></td>
+                <td><input type="password" value=""/></td>
+            </tr>
+            <tr>
+                <td><label>Giới tính</label></td>
+                <td><input id="radio_male" type="radio" checked="true"/><label id="label_male">Nam</label><input
+                        id="radio_female"
+                        type="radio"/><label id="label_female">Nữ</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Ngày sinh</label></td>
+                <td><input type="text" class="datepicker"/></td>
+            </tr>
+            <tr id="tr_button_exist_company">
+                <td></td>
+                <td><input id="radio_button_exist_company" type="radio" checked="true"/><label>Công ty đã có</label>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Công ty</label></td>
+                <td><select type="text">
+                    <option value="1">
+                        Luvina JSC
+                    </option>
+                    <option value="2">
+                        AntSoft
+                    </option>
+                    <option value="3">
+                        Ruby
+                    </option>
+                </select></td>
+            </tr>
+            <tr id="exist_company">
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><label>Tên công ty</label></td>
+                            <td><label>Luvina JSC</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Địa chỉ</label></td>
+                            <td><label>106, Hoàng Quốc Việt</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Email</label></td>
+                            <td><label>info@luvina.net</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Điện thoại</label></td>
+                            <td><label>043156454</label></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr id="tr_button_new_company">
+                <td></td>
+                <td><input id="radio_button_new_company" type="radio"/><label>Đăng ký theo công ty mới</label></td>
+            </tr>
+            <tr id="new_company" style="display: none">
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><label>Tên công ty</label></td>
+                            <td><input type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Địa chỉ</label></td>
+                            <td><input type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Email</label></td>
+                            <td><input type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Số điện thoại</label></td>
+                            <td><input type="text"/></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Nơi đăng ký KCB</label></td>
+                <td><input type="text" value=""/></td>
+            </tr>
+            <tr>
+                <td><label>Ngày bắt đầu thẻ BH</label></td>
+                <td><input type="text" class="datepicker"/></td>
+            </tr>
+            <tr>
+                <td><label>Ngày kết thúc thẻ BH</label></td>
+                <td><input type="text" class="datepicker"/></td>
+            </tr>
+        </table>
+        <button >Hủy</button>
+        <button>Đăng ký</button>
+    </form>
+</div>
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+    $("#tr_button_exist_company").click(function () {
+        $("#radio_button_new_company").prop("checked", false);
+        $("#radio_button_exist_company").prop("checked", true);
+        $("#exist_company").css("display", "contents");
+        $("#new_company").css("display", "none");
+    })
+    $("#tr_button_new_company").click(function () {
+        $("#radio_button_new_company").prop("checked", true);
+        $("#radio_button_exist_company").prop("checked", false);
+        $("#exist_company").css("display", "none");
+        $("#new_company").css("display", "contents");
+    })
+    $("#label_male").click(function () {
+        $("#radio_female").prop("checked", false);
+        $("#radio_male").prop("checked", true);
+    })
+    $("#label_female").click(function () {
+        $("#radio_female").prop("checked", true);
+        $("#radio_male").prop("checked", false);
+    })
+</script>
+</body>
+
+</html>
