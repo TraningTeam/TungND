@@ -8,4 +8,6 @@ import java.util.List;
 public interface CompanyService {
 	
 	List<Company> findAllCompany();
+
+    Company findCompanyById(int companyId);
 }

@@ -22,4 +22,20 @@ public class UserServiceImp implements UserService {
 		return userRepo
 			.searchUser(companyInternalId, userFullName, insuranceNumber, placeOfRegister, softType, limit, offset);
 	}
+	
+	@Override
+	public int getTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
+			String placeOfRegister) {
+		return userRepo
+			.getTotalUser(companyInternalId, userFullName, insuranceNumber, placeOfRegister);
+		
+	}
+	
+	@Override
+	public List<User> getUserDataToExport(int companyIdSelected, String userFullName, String insuranceNumber,
+			String placeOfRegister) {
+		return userRepo
+			.getUserDataToExport(companyIdSelected, userFullName, insuranceNumber, placeOfRegister);
+		
+	}
 }
