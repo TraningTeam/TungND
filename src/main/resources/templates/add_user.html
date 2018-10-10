@@ -68,40 +68,13 @@
             </tr>
             <tr>
                 <td><label>Công ty</label></td>
-                <td><select type="text">
-                    <option value="1">
-                        Luvina JSC
-                    </option>
-                    <option value="2">
-                        AntSoft
-                    </option>
-                    <option value="3">
-                        Ruby
-                    </option>
+                <td><select th:name="company_id" id="company_internal_id">
+                    <option th:each="company:${company_list}" th:value="${company.companyInternalId}"
+                            th:utext="${company.companyName}"></option>
                 </select></td>
             </tr>
             <tr id="exist_company">
-                <td></td>
-                <td>
-                    <table>
-                        <tr>
-                            <td><label>Tên công ty</label></td>
-                            <td><label>Luvina JSC</label></td>
-                        </tr>
-                        <tr>
-                            <td><label>Địa chỉ</label></td>
-                            <td><label>106, Hoàng Quốc Việt</label></td>
-                        </tr>
-                        <tr>
-                            <td><label>Email</label></td>
-                            <td><label>info@luvina.net</label></td>
-                        </tr>
-                        <tr>
-                            <td><label>Điện thoại</label></td>
-                            <td><label>043156454</label></td>
-                        </tr>
-                    </table>
-                </td>
+
             </tr>
             <tr id="tr_button_new_company">
                 <td></td>
@@ -143,7 +116,7 @@
                 <td><input type="text" class="datepicker"/></td>
             </tr>
         </table>
-        <button >Hủy</button>
+        <button>Hủy</button>
         <button>Đăng ký</button>
     </form>
 </div>
@@ -171,6 +144,82 @@
         $("#radio_female").prop("checked", true);
         $("#radio_male").prop("checked", false);
     })
+    $("#company_internal_id").change(function () {
+        var selectedId = this.options[this.selectedIndex].value;
+        $.ajax({
+            type: "GET",
+            url: "/getCompanyById/" + selectedId,
+            success: function (data) {
+                var tr = document.getElementById("exist_company");
+                tr.innerHTML = '';
+                var td1 = document.createElement("td");
+                tr.appendChild(td1);
+                var table = document.createElement("table");
+
+                var tr_child_1 = document.createElement("tr");
+
+                var td_child_1 = document.createElement("td");
+                var label_1 = document.createElement("label");
+                label_1.innerText = "Tên công ty:";
+                td_child_1.appendChild(label_1);
+                tr_child_1.appendChild(td_child_1);
+                var td_child_2 = document.createElement("td");
+                var label_2 = document.createElement("label");
+                label_2.innerText = data.companyName;
+                td_child_2.appendChild(label_2);
+
+                tr_child_1.appendChild(td_child_2);
+
+                var tr_child_2 = document.createElement("tr");
+
+                var td_child_2 = document.createElement("td");
+                var label_2 = document.createElement("label");
+                label_2.innerText = "Địa chỉ";
+                td_child_2.appendChild(label_2);
+                tr_child_2.appendChild(td_child_2);
+                var td_child_3 = document.createElement("td");
+                var label_3 = document.createElement("label");
+                label_3.innerText = data.address;
+                td_child_3.appendChild(label_3);
+
+                tr_child_2.appendChild(td_child_3);
+
+                var tr_child_3 = document.createElement("tr");
+
+                var td_child_3 = document.createElement("td");
+                var label_3 = document.createElement("label");
+                label_3.innerText = "Email";
+                td_child_3.appendChild(label_3);
+                tr_child_3.appendChild(td_child_3);
+                var td_child_4 = document.createElement("td");
+                var label_4 = document.createElement("label");
+                label_4.innerText = data.email;
+                td_child_4.appendChild(label_4);
+
+                tr_child_3.appendChild(td_child_4);
+
+                var tr_child_4 = document.createElement("tr");
+
+                var td_child_4 = document.createElement("td");
+                var label_4 = document.createElement("label");
+                label_4.innerText = "Điện thoại";
+                td_child_4.appendChild(label_4);
+                tr_child_4.appendChild(td_child_4);
+                var td_child_5 = document.createElement("td");
+                var label_5 = document.createElement("label");
+                label_5.innerText = data.telephone;
+                td_child_5.appendChild(label_5);
+
+                tr_child_4.appendChild(td_child_5);
+
+                table.appendChild(tr_child_1);
+                table.appendChild(tr_child_2);
+                table.appendChild(tr_child_3);
+                table.appendChild(tr_child_4);
+                tr.appendChild(table);
+            }
+        })
+    });
 </script>
 </body>
 

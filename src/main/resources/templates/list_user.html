@@ -9,7 +9,8 @@
         <p>Tên công ty</p>
         <select th:name="company_id" id="company_internal_id">
             <option th:each="company:${company_list}" th:value="${company.companyInternalId}"
-                    th:text="${company.companyName}"></option>
+                    th:utext="${company.companyName}"
+                    th:selected="${company.companyInternalId == company_id_selected}"></option>
         </select>
     </div>
     <br/>
@@ -51,15 +52,22 @@
 <table width="100%">
     <tr>
         <td><input type="button" value="Đăng ký" onclick="location.href='/addUser'"/></td>
-        <td><input type="button" value="Export CSV"/></td>
+        <td th:if="${total_user > 0}"><input type="button" value="Export CSV"
+                                             onclick="location.href='/export'"/></td>
     </tr>
 
 </table>
-<table width="100%" border="1">
+<p th:if="${total_user == 0}">Không tìm thấy thẻ bảo hiểm</p>
+<table width="100%" border="1" th:unless="${total_user == 0}">
     <tr>
         <th>Tên người sử dụng
-            <button>?</button>
-            <button>?</button>
+            <a th:if="${sort_type=='ASC'}" style="pointer-events: none;text-decoration: none !important;">&#9650;</a>
+            <a th:unless="${sort_type=='ASC'}" style="color: #374BFD"
+               th:href="@{/listUser(sort_type=ASC,action=sort)}">&#9650;</a>
+
+            <a th:if="${sort_type=='DESC'}" style="pointer-events: none;text-decoration: none !important;">&#9660;</a>
+            <a th:unless="${sort_type=='DESC'}" style="color: #374BFD"
+               th:href="@{/listUser(sort_type=DESC,action=sort)}">&#9660;</a>
         </th>
         <th>Giới tính</th>
         <th>Ngày sinh</th>
@@ -68,23 +76,38 @@
         <th>Nơi đăng ký KCB</th>
     </tr>
     <tr th:each="user:${user_list}">
-        <td th:text="${user.userFullName}"></td>
-        <td th:text="${user.userSexDivision}"></td>
-        <td th:text="${#dates.format(user.birthDate, 'dd-MM-yyyy')}"></td>
-        <td th:text="${user.insurance.insuranceNumber}"></td>
-        <td th:text="${#dates.format(user.insurance.insuranceStartDate,'dd-MM-yyyy')}
+        <td th:utext="${user.userFullName}"></td>
+        <td th:switch="${user.userSexDivision}">
+            <span th:case="'1'">Nam</span>
+            <span th:case="'2'">Nữ</span>
+        </td>
+        <td th:utext="${#dates.format(user.birthDate, 'dd-MM-yyyy')}"></td>
+        <td th:utext="${user.insurance.insuranceNumber}"></td>
+        <td th:utext="${#dates.format(user.insurance.insuranceStartDate,'dd/MM/yyyy')}
                     +'~'
-                    +${#dates.format(user.insurance.insuranceEndDate,'dd-MM-yyyy')}"></td>
-        <td th:text="${user.insurance.placeOfRegister}"></td>
+                    +${#dates.format(user.insurance.insuranceEndDate,'dd/MM/yyyy')}"></td>
+        <td th:utext="${user.insurance.placeOfRegister}"></td>
     </tr>
 </table>
-<a href="/">&lt;&lt;</a>
+<div th:if="${total_user > 0}">
+    <a th:if="${previous_page > 0}" th:href="@{/listUser(current_page=${previous_page},action=paging)}">&lt;&lt;</a>
+    <span th:if="${previous_page > 0}">&#124;</span>
+    <th:block th:each="page : ${page_list}">
+        <a th:href="@{/listUser(current_page=${page},action=paging)}" th:utext="${page}"
+           th:if="${page == current_page}"
+           style="pointer-events: none;text-decoration: none !important;"></a>
+        <a th:href="@{/listUser(current_page=${page},action=paging)}" th:utext="${page}"
+           th:unless="${page == current_page}"></a>
+        <span th:if="${total_page > page}">&#124;</span>
+    </th:block>
+    <a th:if="${next_page > 0}" th:href="@{/listUser(current_page=${next_page},action=paging)}">&gt;&gt;</a>
+</div>
 <script>
     $("#company_internal_id").change(function () {
-        $("#user_full_name").html("");
-        $("#insurance_number").html("");
-        $("#place_of_register").html("");
-    })
+        $("#user_full_name").val("");
+        $("#insurance_number").val("");
+        $("#place_of_register").val("");
+    });
 </script>
 </body>
 </html>
