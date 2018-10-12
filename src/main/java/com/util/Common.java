@@ -127,7 +127,8 @@ public class Common {
     }
 
     public static boolean checkRegexTelephone(String companyTelephone) {
-        return companyTelephone.matches("^(?=((\\d{2,4}-){2}(\\d{2,4}))).{12}$");
+        return companyTelephone.matches("^(?=(\\d{2,4}-){2}(\\d{2,4})).{12}$");
+
     }
 
     public static boolean checkFormatDate(String date) {
