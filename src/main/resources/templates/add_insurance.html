@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <title>Add user</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -27,16 +27,17 @@
 <div th:replace="header::header"></div>
 <div id="main"><p>Thêm mới thông tin thẻ bảo hiểm</p>
     <p></p>
-    <form method="POST" th:action="@{/addUser}" th:object="${userRegisterForm}">
+    <form method="POST" th:action="@{/addInsurance}" th:object="${userRegisterForm}" onkeypress="return dontSubmit()">
         <p style="color:red" th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
         <table>
             <tr>
                 <td><label>Mã số thẻ bảo hiểm</label></td>
-                <td><input th:field="*{insuranceNumber}" type="text"/></td>
+                <td><input th:field="*{insuranceNumber}" type="text" min="10" max="10"/></td>
+                <td><label>(format: 10 chữ số)</label></td>
             </tr>
             <tr>
                 <td><label>Họ và tên</label></td>
-                <td><input th:field="*{userFullName}" type="text"/></td>
+                <td><input th:field="*{userFullName}" type="text" id="user_full_name"/></td>
             </tr>
             <tr>
                 <td><label>Tên đăng nhập</label></td>
@@ -45,6 +46,10 @@
             <tr>
                 <td><label>Mật khẩu</label></td>
                 <td><input th:field="*{password}" type="password"/></td>
+            </tr>
+            <tr>
+                <td><label>Xác nhận mật khẩu</label></td>
+                <td><input th:field="*{rePassword}" type="password"/></td>
             </tr>
             <tr>
                 <td><label>Giới tính</label></td>
@@ -143,8 +148,8 @@
                 <td><label>(format: dd/MM/yyyy)</label></td>
             </tr>
         </table>
-        <button>Hủy</button>
-        <button type="submit">Đăng ký</button>
+        <input type="button" onclick="location.href='/listUser?action=back'" value="Hủy"/>
+        <input type="submit" value="Đăng ký"/>
     </form>
 </div>
 <script>
@@ -195,11 +200,28 @@
         })
     });
 
-    function formatText(id, text) {
-        $.get("/formatName", {"name": text}, function (rs) {
+    $("#user_full_name").focusout(function () {
+        var old_text = $("#user_full_name").val();
+        formatText("user_full_name", old_text);
+    });
+
+    function dontSubmit() {
+        return !(window.event.keyCode == 13);
+    }
+
+    function formatText(id, old_text) {
+        $.get("/formatName", {"name": old_text}, function (rs) {
             $('#' + id).val(rs);
+            alertMessage(rs, old_text);
         })
     }
+
+    function alertMessage(new_text, old_text) {
+        if (new_text != old_text) {
+            alert("Họ và tên đã được format lại chỉ chứa ký tự la tin và không dấu")
+        }
+    }
+
 </script>
 </body>
 
