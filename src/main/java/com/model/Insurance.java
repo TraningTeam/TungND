@@ -1,10 +1,14 @@
 package com.model;
 
+import com.util.Common;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import java.text.ParseException;
 import java.util.Date;
 
 @Entity
@@ -16,6 +20,7 @@ public class Insurance {
 	@Column(name = "insurance_internal_id")
 	private int insuranceInternalId;
 	
+	@Pattern(regexp = "[\\w]{10}", message = "Mã số thẻ bảo hiểm cần nhập 10 ký tự bao gồm cả chữ và số")
 	@Column(name = "insurance_number")
 	private String insuranceNumber;
 	
@@ -28,6 +33,16 @@ public class Insurance {
 	@Column(name = "place_of_register")
 	private String placeOfRegister;
 	
+	
+	public Insurance() {
+	}
+	
+	public Insurance(UserRegisterForm userRegisterForm) throws ParseException {
+		this.insuranceNumber = userRegisterForm.getInsuranceNumber();
+		this.placeOfRegister = userRegisterForm.getPlaceOfRegister();
+		this.insuranceStartDate = Common.convertStringToDate(userRegisterForm.getInsuranceStartDate());
+		this.insuranceEndDate = Common.convertStringToDate(userRegisterForm.getInsuranceEndDate());
+	}
 	
 	public int getInsuranceInternalId() {
 		return insuranceInternalId;

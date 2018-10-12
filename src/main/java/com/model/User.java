@@ -1,6 +1,10 @@
 package com.model;
 
+import com.util.Common;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tbl_user")
@@ -25,10 +34,12 @@ public class User {
 	@JoinColumn(name = "company_internal_id")
 	private Company company;
 	
+	@Valid
 	@OneToOne
 	@JoinColumn(name = "insurance_internal_id")
 	private Insurance insurance;
 	
+	@NotEmpty(message = "Tên đăng nhập không được để trống")
 	@Column(name = "username")
 	private String userName;
 	
@@ -44,6 +55,19 @@ public class User {
 	@Column(name = "birthdate")
 	private Date birthDate;
 	
+	
+	public User() {
+	}
+	
+	public User(UserRegisterForm userRegisterForm) throws ParseException {
+		this.userFullName = userRegisterForm.getUserFullName();
+		this.userName = userRegisterForm.getUserName();
+		this.password = userRegisterForm.getPassword();
+		this.userSexDivision = userRegisterForm.getUserSexDivision().charAt(0);
+		if (Common.checkStringEmptyOrNull(userRegisterForm.getBirthDate()) == true) {
+			this.birthDate = Common.convertStringToDate(userRegisterForm.getBirthDate());
+		}
+	}
 	
 	public int getUserInternalId() {
 		return userInternalId;

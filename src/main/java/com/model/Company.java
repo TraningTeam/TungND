@@ -1,5 +1,7 @@
 package com.model;
 
+import com.util.Common;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ public class Company {
 	@GeneratedValue()
 	@Column(name = "company_internal_id")
 	private int companyInternalId;
-
+	
 	@Column(name = "company_name")
 	private String companyName;
 	
@@ -32,11 +34,15 @@ public class Company {
 	public Company() {
 	}
 	
-	public Company(String companyName, String address, String email, String telephone) {
-		this.companyName = companyName;
-		this.address = address;
-		this.email = email;
-		this.telephone = telephone;
+	public Company(UserRegisterForm userRegisterForm) {
+		this.companyName = userRegisterForm.getCompanyName();
+		this.address = userRegisterForm.getCompanyAddress();
+		if (Common.checkStringEmptyOrNull(userRegisterForm.getCompanyEmail()) == true) {
+			this.email = userRegisterForm.getCompanyEmail();
+		}
+		if (Common.checkStringEmptyOrNull(userRegisterForm.getCompanyTelephone()) == true) {
+			this.telephone = userRegisterForm.getCompanyTelephone();
+		}
 	}
 	
 	public int getCompanyInternalId() {
