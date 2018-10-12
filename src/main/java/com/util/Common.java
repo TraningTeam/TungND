@@ -20,9 +20,8 @@ public class Common {
     public static List<Integer> getListPaging(int totalUser, int currentPage, int limitPage) {
         List<Integer> pageList = new ArrayList<>();
         int totalPage = getTotalPage(totalUser, limitPage);
-        System.out.println(currentPage);
         int startPage = getStartPage(currentPage, totalPage);
-        int endPage = getEndPage(startPage, limitPage);
+        int endPage = getEndPage(startPage, limitPage, totalPage);
         for (int i = startPage; i <= endPage; i++) {
             pageList.add(i);
         }
@@ -41,15 +40,20 @@ public class Common {
         return startPage - 1;
     }
 
-    private static int getEndPage(int startPage, int limitPage) {
-        return startPage + limitPage - 1;
+    private static int getEndPage(int startPage, int limitPage, int totalPage) {
+        if (totalPage > 5) {
+            return startPage + limitPage - 1;
+        }
+        return totalPage;
     }
 
     private static int getStartPage(int currentPage, int totalPage) {
-        if (2 < currentPage && currentPage <= totalPage - 2) {
-            return currentPage - 2;
-        } else if (currentPage > totalPage - 2) {
-            return (int) Math.ceil((double) currentPage / 2) - 1;
+        if (totalPage > 5) {
+            if (2 < currentPage && currentPage <= totalPage - 2) {
+                return currentPage - 2;
+            } else if (currentPage > totalPage - 2) {
+                return (int) Math.ceil((double) currentPage / 2) - 1;
+            }
         }
         return 1;
     }
@@ -123,7 +127,7 @@ public class Common {
     }
 
     public static boolean checkRegexTelephone(String companyTelephone) {
-        return companyTelephone.matches("0[0-9]{10,11}");
+        return companyTelephone.matches("^(?=((\\d{2,4}-){2}(\\d{2,4}))).{12}$");
     }
 
     public static boolean checkFormatDate(String date) {
