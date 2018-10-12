@@ -61,7 +61,7 @@ public class UserRepositoryImp implements UserRepository {
 	}
 	
 	@Override
-	public int getTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
+	public int countTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
 			String placeOfRegister) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(
@@ -95,7 +95,7 @@ public class UserRepositoryImp implements UserRepository {
 	}
 	
 	@Override
-	public List<User> getUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
+	public List<User> findUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
 			String placeOfRegister) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(

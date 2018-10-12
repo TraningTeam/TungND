@@ -39,17 +39,17 @@ public class UserServiceImp implements UserService {
 	}
 	
 	@Override
-	public int getTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
+	public int countTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
 			String placeOfRegister) {
 		return userRepo
-			.getTotalUser(companyInternalId, userFullName, insuranceNumber, placeOfRegister);
+			.countTotalUser(companyInternalId, userFullName, insuranceNumber, placeOfRegister);
 	}
 	
 	@Override
-	public List<User> getUserDataToExport(int companyIdSelected, String userFullName, String insuranceNumber,
+	public List<User> findUserDataToExport(int companyIdSelected, String userFullName, String insuranceNumber,
 			String placeOfRegister) {
 		return userRepo
-			.getUserDataToExport(companyIdSelected, userFullName, insuranceNumber, placeOfRegister);
+			.findUserDataToExport(companyIdSelected, userFullName, insuranceNumber, placeOfRegister);
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class UserServiceImp implements UserService {
 	
 	@Override
 	@Transactional
-	public void addUser(UserRegisterForm userRegisterForm) throws ParseException, RuntimeException {
+	public void addInsurance(UserRegisterForm userRegisterForm) throws ParseException, RuntimeException {
 		User user = new User(userRegisterForm);
 		int companyId = 0;
 		if (userRegisterForm.getCompanyFlag().equals("1")) {

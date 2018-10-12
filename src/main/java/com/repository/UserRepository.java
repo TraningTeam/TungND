@@ -9,9 +9,9 @@ public interface UserRepository {
 	List<User> searchUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister,
 			String sortType, int limit, int offset);
 	
-	int getTotalUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister);
+	int countTotalUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister);
 	
-	List<User> getUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
+	List<User> findUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
 			String placeOfRegister);
 	
 	boolean checkExistUserByUserName(String userName);
