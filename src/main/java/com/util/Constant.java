@@ -10,20 +10,20 @@ public class Constant {
 	
 	
 	public enum GENDER {
-		MALE(1, "Nam"),
-		FEMALE(2, "Nữ");
+		MALE('1', "Nam"),
+		FEMALE('2', "Nữ");
 		
-		private final int code;
+		private final char code;
 		
 		private final String gender;
 		
 		
-		GENDER(int code, String gender) {
+		GENDER(char code, String gender) {
 			this.code = code;
 			this.gender = gender;
 		}
 		
-		public int getCode() {
+		public char getCode() {
 			return code;
 		}
 		
