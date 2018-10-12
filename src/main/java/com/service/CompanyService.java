@@ -10,4 +10,6 @@ public interface CompanyService {
 	List<Company> findAllCompany();
 
     Company findCompanyById(int companyId);
+
+    boolean checkExistCompanyByCompanyName(String companyName);
 }

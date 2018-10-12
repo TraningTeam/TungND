@@ -24,4 +24,12 @@ public class CompanyServiceImp implements CompanyService {
 	public Company findCompanyById(int companyId) {
 		return companyRepo.findCompanyById(companyId);
 	}
+	
+	@Override
+	public boolean checkExistCompanyByCompanyName(String companyName) {
+		if (companyRepo.findByCompanyName(companyName) == null) {
+			return true;
+		}
+		return false;
+	}
 }
