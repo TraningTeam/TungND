@@ -17,7 +17,7 @@ import com.repository.UserRepository;
 public class UserRepositoryImp implements UserRepository {
 	
 	@Autowired
-	EntityManagerFactory entityManagerFactory;
+	EntityManager entityManager;
 	
 	
 	@Override
@@ -46,7 +46,6 @@ public class UserRepositoryImp implements UserRepository {
 		sql.append(limit);
 		sql.append(" OFFSET ");
 		sql.append(offset);
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createNativeQuery(sql.toString(), User.class);
 		query.setParameter("company_internal_id", companyInternalId);
 		if (userFullName.isEmpty() == false) {
@@ -81,7 +80,6 @@ public class UserRepositoryImp implements UserRepository {
 		if (placeOfRegister.isEmpty() == false) {
 			sql.append(" AND ins.place_of_register LIKE :place_of_register ");
 		}
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createNativeQuery(sql.toString());
 		query.setParameter("company_internal_id", companyInternalId);
 		if (userFullName.isEmpty() == false) {
@@ -116,7 +114,6 @@ public class UserRepositoryImp implements UserRepository {
 		if (placeOfRegister.isEmpty() == false) {
 			sql.append(" AND ins.place_of_register LIKE :place_of_register ");
 		}
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Query query = entityManager.createNativeQuery(sql.toString(), User.class);
 		query.setParameter("company_internal_id", companyInternalId);
 		if (userFullName.isEmpty() == false) {
@@ -129,5 +126,36 @@ public class UserRepositoryImp implements UserRepository {
 			query.setParameter("place_of_register", "%" + placeOfRegister + "%");
 		}
 		return query.getResultList();
+	}
+	
+	@Override
+	public boolean checkExistUserByUserName(String userName) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(
+				"SELECT * FROM tbl_user u WHERE u.username = :user_name");
+		Query query = entityManager.createNativeQuery(sql.toString(), User.class);
+		query.setParameter("user_name", userName);
+		if (query.getResultList().size() == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void saveUser(User user) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(
+				"INSERT INTO tbl_user (company_internal_id, insurance_internal_id, username, password, user_full_name, user_sex_division, birthdate) "
+						+
+						"VALUES (:company_internal_id, :insurance_internal_id, :username, :password, :user_full_name, :user_sex_division, :birthdate)");
+		Query query = entityManager.createNativeQuery(sql.toString(), User.class);
+		query.setParameter("company_internal_id", user.getCompany().getCompanyInternalId());
+		query.setParameter("insurance_internal_id", user.getInsurance().getInsuranceInternalId());
+		query.setParameter("username", user.getUserName());
+		query.setParameter("password", user.getPassword());
+		query.setParameter("user_full_name", user.getUserFullName());
+		query.setParameter("user_sex_division", user.getUserSexDivision());
+		query.setParameter("birthdate", user.getBirthDate());
+		query.executeUpdate();
 	}
 }

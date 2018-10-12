@@ -14,4 +14,7 @@ public interface CompanyRepository extends CrudRepository<Company, Integer> {
 	
 	@Query(value = "SELECT * FROM tbl_company c WHERE c.company_internal_id = ?1", nativeQuery = true)
 	Company findCompanyById(int companyId);
+	
+	@Query(value = "SELECT * FROM tbl_company c WHERE c.company_name = ?1", nativeQuery = true)
+	Company findByCompanyName(String companyName);
 }

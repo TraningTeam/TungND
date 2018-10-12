@@ -13,4 +13,8 @@ public interface UserRepository {
 	
 	List<User> getUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
 			String placeOfRegister);
+	
+	boolean checkExistUserByUserName(String userName);
+	
+	void saveUser(User user);
 }
