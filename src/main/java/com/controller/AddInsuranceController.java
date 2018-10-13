@@ -35,7 +35,10 @@ public class AddInsuranceController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * @param userRegisterForm
+     * @return
+     */
     @GetMapping("/addInsurance")
     public ModelAndView addInsurance(@ModelAttribute UserRegisterForm userRegisterForm) {
         initRegisterForm(userRegisterForm);
@@ -46,7 +49,12 @@ public class AddInsuranceController {
         return modelAndView;
     }
 
-
+    /**
+     * @param userRegisterForm
+     * @param errors
+     * @return
+     * @throws ParseException
+     */
     @PostMapping("/addInsurance")
     public ModelAndView addInsurance(@ModelAttribute UserRegisterForm userRegisterForm,
                                      Errors errors) throws ParseException {
@@ -60,22 +68,33 @@ public class AddInsuranceController {
             return modelAndView;
         } else {
             userService.addInsurance(userRegisterForm);
-            return new ModelAndView("redirect:/listUser");
+            return new ModelAndView("redirect:/listInsurance");
         }
     }
 
+    /**
+     * @param companyId
+     * @return
+     */
     @GetMapping("/getCompanyById/{id}")
     @ResponseBody
     public Company addInsurance(@PathVariable(value = "id") int companyId) {
         return companyService.findCompanyById(companyId);
     }
 
+    /**
+     * @param name
+     * @return
+     */
     @RequestMapping(value = "/formatName", method = RequestMethod.GET)
     @ResponseBody
     public String formatName(@RequestParam(value = "name", defaultValue = "") String name) {
         return Common.formatText(name);
     }
 
+    /**
+     * @param userRegisterForm
+     */
     private void initRegisterForm(UserRegisterForm userRegisterForm) {
         userRegisterForm.setInsuranceNumber("");
         userRegisterForm.setUserName("");

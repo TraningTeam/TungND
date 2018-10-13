@@ -12,10 +12,12 @@ import java.util.regex.Pattern;
 public class Common {
 
     /**
-     * @param totalUser
-     * @param currentPage
-     * @param limitPage
-     * @return
+     * Hàm lấy về danh sách phân trang
+     *
+     * @param totalUser   là tổng số người dùng khi thực hiện chức năng tìm kiếm
+     * @param currentPage là trang hiện tại được chọn
+     * @param limitPage   là số phân trang tối đa
+     * @return danh sách phân trang
      */
     public static List<Integer> getListPaging(int totalUser, int currentPage, int limitPage) {
         List<Integer> pageList = new ArrayList<>();
@@ -28,6 +30,13 @@ public class Common {
         return pageList;
     }
 
+    /**
+     * Hàm lấy về trang kế tiếp
+     *
+     * @param currentPage
+     * @param totalPage
+     * @return
+     */
     public static int getNextPage(int currentPage, int totalPage) {
         int nextPage = currentPage + 1;
         if (nextPage > totalPage) {
@@ -36,10 +45,20 @@ public class Common {
         return nextPage;
     }
 
+    /**
+     * @param startPage
+     * @return
+     */
     public static int getPreviousPage(int startPage) {
         return startPage - 1;
     }
 
+    /**
+     * @param startPage
+     * @param limitPage
+     * @param totalPage
+     * @return
+     */
     private static int getEndPage(int startPage, int limitPage, int totalPage) {
         if (totalPage > 5) {
             return startPage + limitPage - 1;
@@ -47,6 +66,11 @@ public class Common {
         return totalPage;
     }
 
+    /**
+     * @param currentPage
+     * @param totalPage
+     * @return
+     */
     private static int getStartPage(int currentPage, int totalPage) {
         if (totalPage > 5) {
             if (2 < currentPage && currentPage <= totalPage - 2) {
@@ -58,10 +82,19 @@ public class Common {
         return 1;
     }
 
+    /**
+     * @param totalUser
+     * @param limitPage
+     * @return
+     */
     public static int getTotalPage(int totalUser, int limitPage) {
         return (int) Math.ceil((double) totalUser / limitPage);
     }
 
+    /**
+     * @param currentPage
+     * @return
+     */
     public static int getOffset(int currentPage) {
         return (currentPage - 1) * Constant.LIMIT_USER;
     }
@@ -71,6 +104,10 @@ public class Common {
         return dateFormat.format(date);
     }
 
+    /**
+     * @param data
+     * @return
+     */
     public static boolean checkStringEmptyOrNull(String data) {
         if (data == null || data.isEmpty()) {
             return false;
@@ -78,22 +115,44 @@ public class Common {
         return true;
     }
 
+    /**
+     * @param insuranceNumber
+     * @return
+     */
     public static boolean checkRegexInsuranceNumber(String insuranceNumber) {
         return insuranceNumber.matches("^\\d{10}$");
     }
 
+    /**
+     * @param field
+     * @param length
+     * @return
+     */
     public static boolean checkMaxLength(String field, int length) {
         return field.length() <= length;
     }
 
+    /**
+     * @param userName
+     * @return
+     */
     public static boolean checkMaxLengthUserName(String userName) {
         return userName.length() < 16;
     }
 
+    /**
+     * @param password
+     * @return
+     */
     public static boolean checkMaxLengthPassword(String password) {
         return password.length() < 33;
     }
 
+    /**
+     * @param insuranceStartDate
+     * @param insuranceEndDate
+     * @return
+     */
     public static boolean checkValidInsuranceDate(String insuranceStartDate, String insuranceEndDate) {
         DateFormat dateFormat = setFormatValidDate();
         boolean check = false;
@@ -105,12 +164,20 @@ public class Common {
         return check;
     }
 
+    /**
+     * @return
+     */
     private static DateFormat setFormatValidDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
         return dateFormat;
     }
 
+    /**
+     * @param birthDate
+     * @param currentDate
+     * @return
+     */
     public static boolean checkValidBirthdate(String birthDate, Date currentDate) {
         DateFormat dateFormat = setFormatValidDate();
         boolean check = false;
@@ -122,15 +189,27 @@ public class Common {
         return check;
     }
 
+    /**
+     * @param companyEmail
+     * @return
+     */
     public static boolean checkRegexEmail(String companyEmail) {
         return companyEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 
+    /**
+     * @param companyTelephone
+     * @return
+     */
     public static boolean checkRegexTelephone(String companyTelephone) {
         return companyTelephone.matches("^(?=(\\d{2,4}-){2}(\\d{2,4})).{12}$");
 
     }
 
+    /**
+     * @param date
+     * @return
+     */
     public static boolean checkFormatDate(String date) {
         DateFormat dateFormat = setFormatValidDate();
         try {
@@ -141,6 +220,11 @@ public class Common {
         return true;
     }
 
+    /**
+     * @param date
+     * @return
+     * @throws ParseException
+     */
     public static Date convertStringToDate(String date) throws ParseException {
         return new SimpleDateFormat("dd/MM/yyyy").parse(date);
     }
@@ -184,6 +268,11 @@ public class Common {
         return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d");
     }
 
+    /**
+     * @param password
+     * @param rePassword
+     * @return
+     */
     public static boolean comparePasswordAndRepassword(String password, String rePassword) {
         return password.equals(rePassword);
     }

@@ -29,6 +29,6 @@ public class ErrorHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     protected ModelAndView catchExceptionRuntime() {
-        return new ModelAndView("redirect:/listUser");
+        return new ModelAndView("redirect:/listInsurance");
     }
 }
