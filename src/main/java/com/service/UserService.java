@@ -2,6 +2,7 @@ package com.service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import com.model.User;
 import com.model.RegisterInsuranceRequest;
@@ -60,4 +61,18 @@ public interface UserService {
      * @throws ParseException if convert a date invalid
      */
     void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException;
+
+    /**
+     * Get data user map
+     *
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @param sortType          sort type
+     * @param companyIdSelected company id is selected by user
+     * @param totalUser         total number of user found
+     * @param currentPage       current page is selected by user
+     * @return a map processed
+     */
+    Map<String, Object> getUserMapData(String userFullName, String insuranceNumber, String placeOfRegister, String sortType, int companyIdSelected, int totalUser, int currentPage);
 }

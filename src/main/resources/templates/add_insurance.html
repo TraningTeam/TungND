@@ -156,7 +156,7 @@
 <script>
     $(function () {
         var companyFlag = $("#company_flag").val();
-        if (companyFlag == '1') {
+        if (companyFlag) {
             $("#exist_company").css("display", "contents");
             $("#new_company").css("display", "none");
         } else {

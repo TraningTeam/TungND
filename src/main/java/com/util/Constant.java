@@ -68,7 +68,10 @@ public class Constant {
     /** Attribute of message */
     public static final String ATTRIBUTE_MESSAGE = "message";
 
-    /** View of list insurance */
+    /** Attribute of user map*/
+	public static final String ATTRIBUTE_USER_MAP = "user_map";
+
+	/** View of list insurance */
     public static final String VIEW_LIST_INSURANCE = "list_insurance";
 
     /** View of add insurance */
