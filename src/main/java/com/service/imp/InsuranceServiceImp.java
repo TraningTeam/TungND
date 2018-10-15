@@ -15,7 +15,7 @@ public class InsuranceServiceImp implements InsuranceService {
 	
 	@Override
 	public boolean checkExistInsuranceNumber(String insuranceNumber) {
-		if (insuranceRepo.findByInsuranceNumber(insuranceNumber) == null) {
+		if (insuranceRepo.findInsuranceByInsuranceNumber(insuranceNumber) == null) {
 			return true;
 		}
 		return false;

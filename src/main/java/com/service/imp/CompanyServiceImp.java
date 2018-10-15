@@ -10,26 +10,25 @@ import java.util.List;
 
 @Service
 public class CompanyServiceImp implements CompanyService {
-	
-	@Autowired
-	CompanyRepository companyRepo;
-	
-	
-	@Override
-	public List<Company> findAllCompany() {
-		return (List<Company>) companyRepo.findAllCompany();
-	}
-	
-	@Override
-	public Company findCompanyById(int companyId) {
-		return companyRepo.findCompanyById(companyId);
-	}
-	
-	@Override
-	public boolean checkExistCompanyByCompanyName(String companyName) {
-		if (companyRepo.findByCompanyName(companyName) == null) {
-			return true;
-		}
-		return false;
-	}
+
+    @Autowired
+    CompanyRepository companyRepo;
+
+    @Override
+    public List<Company> findAllCompany() {
+        return companyRepo.findAllCompany();
+    }
+
+    @Override
+    public Company findCompanyById(int companyId) {
+        return companyRepo.findCompanyById(companyId);
+    }
+
+    @Override
+    public boolean checkExistCompanyByCompanyName(String companyName) {
+        if (companyRepo.findCompanyByName(companyName) == null) {
+            return true;
+        }
+        return false;
+    }
 }

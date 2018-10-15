@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 public class Common {
 
     /**
-     * Hàm lấy về danh sách phân trang
+     * Find a list paging
      *
-     * @param totalUser   là tổng số người dùng khi thực hiện chức năng tìm kiếm
-     * @param currentPage là trang hiện tại được chọn
-     * @param limitPage   là số phân trang tối đa
-     * @return danh sách phân trang
+     * @param totalUser   total user when searchTotal number of users found when search
+     * @param currentPage index of current page is selected by the user
+     * @param limitPage   maximum number of pages to paging
+     * @return list index of paging
      */
     public static List<Integer> getListPaging(int totalUser, int currentPage, int limitPage) {
         List<Integer> pageList = new ArrayList<>();
@@ -31,11 +31,11 @@ public class Common {
     }
 
     /**
-     * Hàm lấy về trang kế tiếp
+     * Find index of next page
      *
-     * @param currentPage
-     * @param totalPage
-     * @return
+     * @param currentPage index of current page is selected by the user
+     * @param totalPage   total number of pages found when search
+     * @return index of next page
      */
     public static int getNextPage(int currentPage, int totalPage) {
         int nextPage = currentPage + 1;
@@ -46,30 +46,22 @@ public class Common {
     }
 
     /**
-     * @param startPage
-     * @return
+     * Find index of previous page
+     *
+     * @param startPage index of first page in list paging
+     * @return index of previous page
      */
     public static int getPreviousPage(int startPage) {
         return startPage - 1;
     }
 
-    /**
-     * @param startPage
-     * @param limitPage
-     * @param totalPage
-     * @return
-     */
-    private static int getEndPage(int startPage, int limitPage, int totalPage) {
-        if (totalPage > 5) {
-            return startPage + limitPage - 1;
-        }
-        return totalPage;
-    }
 
     /**
-     * @param currentPage
-     * @param totalPage
-     * @return
+     * Find index of start page in list paging
+     *
+     * @param currentPage index of current page is selected by the user
+     * @param totalPage   total number of pages found when search
+     * @return index of start page
      */
     private static int getStartPage(int currentPage, int totalPage) {
         if (totalPage > 5) {
@@ -83,79 +75,90 @@ public class Common {
     }
 
     /**
-     * @param totalUser
-     * @param limitPage
-     * @return
+     * Find index of end page
+     *
+     * @param startPage first page in list paging
+     * @param limitPage maximum number of pages to paging
+     * @param totalPage Total number of pages found when search
+     * @return index of end page
+     */
+    private static int getEndPage(int startPage, int limitPage, int totalPage) {
+        if (totalPage > 5) {
+            return startPage + limitPage - 1;
+        }
+        return totalPage;
+    }
+
+    /**
+     * Find total number of pages
+     *
+     * @param totalUser total user when search
+     * @param limitPage maximum number of pages to paging
+     * @return total number of pages
      */
     public static int getTotalPage(int totalUser, int limitPage) {
         return (int) Math.ceil((double) totalUser / limitPage);
     }
 
     /**
-     * @param currentPage
-     * @return
+     * Find offset by current page
+     *
+     * @param currentPage current page is selected by the user
+     * @return index of offset
      */
     public static int getOffset(int currentPage) {
         return (currentPage - 1) * Constant.LIMIT_USER;
     }
 
-    public static String formatDate(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(date);
-    }
 
     /**
-     * @param data
-     * @return
+     * Check empty string or null string
+     *
+     * @param str string to check
+     * @return true if {@code str} is not null or empty,
+     * And false if {@code str} is null or empty
      */
-    public static boolean checkStringEmptyOrNull(String data) {
-        if (data == null || data.isEmpty()) {
+    public static boolean checkStringEmptyOrNull(String str) {
+        if (str == null || str.isEmpty()) {
             return false;
         }
         return true;
     }
 
     /**
-     * @param insuranceNumber
-     * @return
+     * Check string {@code insuranceNumber} matches with regex
+     *
+     * @param insuranceNumber string to regex
+     * @return true if {@code insuranceNumber} matches with regex,
+     * And false if {@code insuranceNumber} not matches with regex
      */
     public static boolean checkRegexInsuranceNumber(String insuranceNumber) {
         return insuranceNumber.matches("^\\d{10}$");
     }
 
     /**
-     * @param field
-     * @param length
-     * @return
+     * Check string is less than or equal to max length
+     *
+     * @param field     field to check
+     * @param maxLength max length of string
+     * @return true if {@code field} is less than or equal to {@code maxLength},
+     * And false if {@code field} is greater than {@code maxLength}
      */
-    public static boolean checkMaxLength(String field, int length) {
-        return field.length() <= length;
+    public static boolean checkMaxLength(String field, int maxLength) {
+        return field.length() <= maxLength;
     }
 
     /**
-     * @param userName
-     * @return
-     */
-    public static boolean checkMaxLengthUserName(String userName) {
-        return userName.length() < 16;
-    }
-
-    /**
-     * @param password
-     * @return
-     */
-    public static boolean checkMaxLengthPassword(String password) {
-        return password.length() < 33;
-    }
-
-    /**
-     * @param insuranceStartDate
-     * @param insuranceEndDate
-     * @return
+     * Check insurance start date is less than insurance end date
+     *
+     * @param insuranceStartDate string of insurance start date
+     * @param insuranceEndDate   string of insurance end date
+     * @return true if {@code insuranceStartDate} is less than or equal to {@code insuranceEndDate},
+     * And false if {@code insuranceStartDate} is greater than {@code insuranceEndDate}
      */
     public static boolean checkValidInsuranceDate(String insuranceStartDate, String insuranceEndDate) {
         DateFormat dateFormat = setFormatValidDate();
-        boolean check = false;
+        boolean check;
         try {
             check = dateFormat.parse(insuranceStartDate).before(dateFormat.parse(insuranceEndDate));
         } catch (ParseException parseException) {
@@ -164,42 +167,13 @@ public class Common {
         return check;
     }
 
-    /**
-     * @return
-     */
-    private static DateFormat setFormatValidDate() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        dateFormat.setLenient(false);
-        return dateFormat;
-    }
 
     /**
-     * @param birthDate
-     * @param currentDate
-     * @return
-     */
-    public static boolean checkValidBirthdate(String birthDate, Date currentDate) {
-        DateFormat dateFormat = setFormatValidDate();
-        boolean check = false;
-        try {
-            check = dateFormat.parse(birthDate).before(currentDate);
-        } catch (ParseException parseException) {
-            return false;
-        }
-        return check;
-    }
-
-    /**
-     * @param companyEmail
-     * @return
-     */
-    public static boolean checkRegexEmail(String companyEmail) {
-        return companyEmail.matches("^[A-Za-z0-9+_.-]+@(.+)$");
-    }
-
-    /**
-     * @param companyTelephone
-     * @return
+     * Check string {@code companyTelephone} matches with regex
+     *
+     * @param companyTelephone string to regex
+     * @return true if {@code companyTelephone} matches with regex,
+     * And false if {@code companyTelephone} not matches with regex
      */
     public static boolean checkRegexTelephone(String companyTelephone) {
         return companyTelephone.matches("^(?=(\\d{2,4}-){2}(\\d{2,4})).{12}$");
@@ -207,8 +181,21 @@ public class Common {
     }
 
     /**
-     * @param date
-     * @return
+     * Format date to date with dd/MM/yyyy format
+     *
+     * @param date date to format
+     * @return date with dd/MM/yyyy format
+     */
+    public static String formatDate(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat(Constant.FORMAT_DD_MM_YYYY);
+        return dateFormat.format(date);
+    }
+
+    /**
+     * Check {@code date} is valid date
+     *
+     * @param date string date to format
+     * @return true if {@code date} is valid date and false if {@code date} is invalid date
      */
     public static boolean checkFormatDate(String date) {
         DateFormat dateFormat = setFormatValidDate();
@@ -221,31 +208,53 @@ public class Common {
     }
 
     /**
-     * @param date
-     * @return
-     * @throws ParseException
+     * Check {@code birthDate} is less than {@code currentDate}
+     *
+     * @param birthDate   string of birth date
+     * @param currentDate current date
+     * @return true if {@code birthDate} is less than or equal to {@code currentDate},
+     * And false if {@code birthDate} is greater than {@code currentDate}
      */
-    public static Date convertStringToDate(String date) throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy").parse(date);
+    public static boolean checkValidBirthdate(String birthDate, Date currentDate) {
+        DateFormat dateFormat = setFormatValidDate();
+        boolean check;
+        try {
+            check = dateFormat.parse(birthDate).before(currentDate);
+        } catch (ParseException parseException) {
+            return false;
+        }
+        return check;
     }
 
     /**
-     * Hàm chuyển 1 chuỗi bất ký thành 1 chuỗi tiếng việt không dấu,
-     * Viết hoa chữ cái đầu mỗi từ
+     * Convert a string date to date
      *
-     * @param text chuỗi ký tự
-     * @return chuỗi sau khi format
+     * @param date string of date
+     * @return date after convert from string
+     * @throws ParseException if {@code date} is not a string date or {@code date} is an invalid date
+     */
+    public static Date convertStringToDate(String date) throws ParseException {
+        DateFormat dateFormat = setFormatValidDate();
+        return dateFormat.parse(date);
+    }
+
+    /**
+     * Convert {@code text} to uncompressed string,
+     * Upper case the first letter of each word
+     *
+     * @param text string
+     * @return string formatted
      */
     public static String formatText(String text) {
-        // chuyển về viết thường không dấu
+        // convert to uncompressed string
         String s = unAccent(text.trim()).toLowerCase();
-        //loại bỏ ký tự không phải chữ latin
+        //Remove non-latin characters
         s = s.replaceAll("[^A-Za-z\\s]", "");
 
         String s2[] = s.split(" ");
         StringBuffer result = new StringBuffer();
         for (int i = 0; i < s2.length; i++) {
-            // kiểm tra khoảng trắng
+            // check white space
             if (s2[i].length() > 0) {
                 //viết hoa ký tự đầu
                 s2[i] = s2[i].substring(0, 1).toUpperCase() + s2[i].substring(1);
@@ -257,10 +266,10 @@ public class Common {
     }
 
     /**
-     * Hàm chuyển ký tự tiếng việt có dấu về không dấu
+     * Convert {@code str} to uncompressed string
      *
-     * @param str là chuỗi ký tự
-     * @return chuỗi ký tự không dấu
+     * @param str string
+     * @return uncompressed string
      */
     public static String unAccent(String str) {
         String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
@@ -269,11 +278,24 @@ public class Common {
     }
 
     /**
-     * @param password
-     * @param rePassword
-     * @return
+     * Compare two string
+     *
+     * @param str1 string first
+     * @param str2 string second
+     * @return true if {@code str1} is equal to str2 and false if {@code str1} is not equal to str2
      */
-    public static boolean comparePasswordAndRepassword(String password, String rePassword) {
-        return password.equals(rePassword);
+    public static boolean compareString(String str1, String str2) {
+        return str1.equals(str2);
+    }
+
+    /**
+     * Set {@code DateFormat} not format a invalid date (Example: 29/02/2017, 31/04/2018,...)
+     *
+     * @return an object {@code DateFormat}
+     */
+    private static DateFormat setFormatValidDate() {
+        DateFormat dateFormat = new SimpleDateFormat(Constant.FORMAT_DD_MM_YYYY);
+        dateFormat.setLenient(false);
+        return dateFormat;
     }
 }

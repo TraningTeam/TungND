@@ -27,7 +27,8 @@
 <div th:replace="header::header"></div>
 <div id="main"><p>Thêm mới thông tin thẻ bảo hiểm</p>
     <p></p>
-    <form method="POST" th:action="@{/addInsurance}" th:object="${userRegisterForm}" onkeypress="return dontSubmit()">
+    <form method="POST" th:action="@{/addInsurance}" th:object="${registerInsuranceRequest}"
+          onkeypress="return dontSubmit()">
         <p style="color:red" th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
         <table>
             <tr>
@@ -193,14 +194,14 @@
         var selectedId = this.options[this.selectedIndex].value;
         $.ajax({
             type: "GET",
-            url: "/getCompanyById/" + selectedId,
+            url: "/findCompanyById/" + selectedId,
             success: function (data) {
                 addExistCompanyInfoForm(data);
             }
         })
     });
 
-    $("#user_full_name").focusout(function () {
+    $("#user_full_name").blur(function () {
         var old_text = $("#user_full_name").val();
         formatText("user_full_name", old_text);
     });

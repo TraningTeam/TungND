@@ -4,10 +4,10 @@
 <body style="padding: 20px">
 <div th:replace="header::header"></div>
 <p>Danh sách thẻ bảo hiểm</p>
-<form method="GET" th:action="@{/listInsurance}">
+<form method="GET" th:action="@{/listInsurance}" th:object="${searchInsuranceRequest}">
     <div style="margin-left: 10px">
         <p>Tên công ty</p>
-        <select th:name="company_id" id="company_internal_id">
+        <select th:name="${company_id_selected}" id="company_internal_id">
             <option th:each="company:${company_list}" th:value="${company.companyInternalId}"
                     th:utext="${company.companyName}"
                     th:selected="${company.companyInternalId == company_id_selected}"></option>
@@ -21,7 +21,7 @@
                 <label>Tên người sử dụng</label>
             </td>
             <td>
-                <input type="text" th:name="user_full_name" th:value="${user_full_name}" id="user_full_name"/>
+                <input type="text" th:field="*{userFullName}" th:value="${user_full_name}" id="user_full_name"/>
             </td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
                 <label>Mã số thẻ bảo hiểm</label>
             </td>
             <td>
-                <input type="text" th:name="insurance_number" th:value="${insurance_number}" id="insurance_number"/>
+                <input type="text" th:field="*{insuranceNumber}" th:value="${insurance_number}" id="insurance_number"/>
             </td>
 
         </tr>
@@ -38,7 +38,8 @@
                 <label>Nơi đăng ký</label>
             </td>
             <td>
-                <input type="text" th:name="place_of_register" th:value="${place_of_register}" id="place_of_register"/>
+                <input type="text" th:field="*{placeOfRegister}" th:value="${place_of_register}"
+                       id="place_of_register"/>
             </td>
         </tr>
         <tr>
@@ -91,7 +92,8 @@
     </tr>
 </table>
 <div th:if="${total_user > 0}">
-    <a th:if="${previous_page > 0}" th:href="@{/listInsurance(current_page=${previous_page},action=paging)}">&lt;&lt;</a>
+    <a th:if="${previous_page > 0}"
+       th:href="@{/listInsurance(current_page=${previous_page},action=paging)}">&lt;&lt;</a>
     <span th:if="${previous_page > 0}">&#124;</span>
     <th:block th:each="page : ${page_list}">
         <a th:href="@{/listInsurance(current_page=${page},action=paging)}" th:utext="${page}"

@@ -4,18 +4,60 @@ import java.text.ParseException;
 import java.util.List;
 
 import com.model.User;
-import com.model.UserRegisterForm;
+import com.model.RegisterInsuranceRequest;
 
 public interface UserService {
 
-    List<User> searchUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister,
-                          String sortType, int limit, int offset);
+    /**
+     * Find all user with condition search
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @param sortType          sort type of user full name
+     * @param limit             limit of user found
+     * @param offset            index of start user in database
+     * @return list user
+     */
+    List<User> findUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister,
+                        String sortType, int limit, int offset);
 
+    /**
+     * Count total user with condition search
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @return total user
+     */
     int countTotalUser(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister);
 
-    List<User> findUserDataToExport(int companyIdSelected, String userFullName, String insuranceNumber, String placeOfRegister);
+    /**
+     * Find user with condition search to export
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @return list user
+     */
+    List<User> findUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber, String placeOfRegister);
 
+    /**
+     * Check user name existed or not
+     *
+     * @param userName user name
+     * @return true if user name not exist and false if user name existed
+     */
     boolean checkExistUserByUserName(String userName);
 
-    void addInsurance(UserRegisterForm userRegisterForm) throws ParseException;
+    /**
+     * Save insurance data
+     *
+     * @param registerInsuranceRequest object contains all data to register
+     * @throws ParseException if convert a date invalid
+     */
+    void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException;
 }

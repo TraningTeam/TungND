@@ -1,10 +1,12 @@
 package com.controller;
 
-import java.text.ParseException;
-import java.util.List;
-
+import com.model.Company;
+import com.model.RegisterInsuranceRequest;
+import com.service.CompanyService;
 import com.service.UserService;
 import com.util.Common;
+import com.util.Constant;
+import com.validate.InsuranceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.model.Company;
-import com.model.UserRegisterForm;
-import com.service.CompanyService;
-import com.validate.UserValidation;
+import java.text.ParseException;
+import java.util.List;
 
 @Controller
 public class AddInsuranceController {
@@ -30,61 +30,70 @@ public class AddInsuranceController {
     private CompanyService companyService;
 
     @Autowired
-    private UserValidation userValidation;
+    private InsuranceValidation insuranceValidation;
 
     @Autowired
     private UserService userService;
 
+
     /**
-     * @param userRegisterForm
-     * @return
+     * Get view of add insurance with method get
+     *
+     * @param registerInsuranceRequest
+     * @return view of add insurance
      */
-    @GetMapping("/addInsurance")
-    public ModelAndView addInsurance(@ModelAttribute UserRegisterForm userRegisterForm) {
-        initRegisterForm(userRegisterForm);
+    @GetMapping(Constant.URL_ADD_INSURANCE)
+    public ModelAndView addInsurance(@ModelAttribute RegisterInsuranceRequest registerInsuranceRequest) {
         List<Company> companyList = companyService.findAllCompany();
         ModelAndView modelAndView = new ModelAndView("add_insurance");
-        modelAndView.addObject("company_list", companyList);
-        modelAndView.addObject("company", companyList.get(0));
+        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY_LIST, companyList);
+        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY, companyList.get(0));
         return modelAndView;
     }
 
     /**
-     * @param userRegisterForm
-     * @param errors
-     * @return
-     * @throws ParseException
+     * Get view of add insurance or get view of list insurance with method post
+     *
+     * @param registerInsuranceRequest form contains field to register
+     * @param errors                   object contains all of error
+     * @return redirect to url /listInsurance if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is false
+     * Or view of add insurance if if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is true
+     * @throws ParseException if date field into {@code registerInsuranceRequest} convert by {@date format} is invalid
      */
-    @PostMapping("/addInsurance")
-    public ModelAndView addInsurance(@ModelAttribute UserRegisterForm userRegisterForm,
+    @PostMapping(Constant.URL_ADD_INSURANCE)
+    public ModelAndView addInsurance(@ModelAttribute RegisterInsuranceRequest registerInsuranceRequest,
                                      Errors errors) throws ParseException {
-        ModelAndView modelAndView = new ModelAndView("add_insurance");
-        if (userValidation.validate(userRegisterForm, errors) == false) {
-            List<Company> companyList = companyService.findAllCompany();
-            int companyId = Integer.parseInt(userRegisterForm.getCompanyInternalId());
-            Company company = companyService.findCompanyById(companyId);
-            modelAndView.addObject("company_list", companyList);
-            modelAndView.addObject("company", company);
-            return modelAndView;
+        ModelAndView modelAndView = new ModelAndView(Constant.VIEW_ADD_INSURANCE);
+        if (insuranceValidation.validate(registerInsuranceRequest, errors) == false) {
+            userService.saveInsurance(registerInsuranceRequest);
+            return new ModelAndView("redirect:" + Constant.URL_LIST_INSURANCE);
         } else {
-            userService.addInsurance(userRegisterForm);
-            return new ModelAndView("redirect:/listInsurance");
+            List<Company> companyList = companyService.findAllCompany();
+            int companyId = Integer.parseInt(registerInsuranceRequest.getCompanyInternalId());
+            Company company = companyService.findCompanyById(companyId);
+            modelAndView.addObject(Constant.ATTRIBUTE_COMPANY_LIST, companyList);
+            modelAndView.addObject(Constant.ATTRIBUTE_COMPANY, company);
+            return modelAndView;
         }
     }
 
     /**
-     * @param companyId
-     * @return
+     * Find company info by id
+     *
+     * @param companyId company id is selected by user
+     * @return object company found by id
      */
-    @GetMapping("/getCompanyById/{id}")
+    @GetMapping("/findCompanyById/{id}")
     @ResponseBody
-    public Company addInsurance(@PathVariable(value = "id") int companyId) {
+    public Company findCompanyById(@PathVariable(value = "id") int companyId) {
         return companyService.findCompanyById(companyId);
     }
 
     /**
-     * @param name
-     * @return
+     * Format a text
+     *
+     * @param name string to format
+     * @return string is formatted
      */
     @RequestMapping(value = "/formatName", method = RequestMethod.GET)
     @ResponseBody
@@ -92,24 +101,4 @@ public class AddInsuranceController {
         return Common.formatText(name);
     }
 
-    /**
-     * @param userRegisterForm
-     */
-    private void initRegisterForm(UserRegisterForm userRegisterForm) {
-        userRegisterForm.setInsuranceNumber("");
-        userRegisterForm.setUserName("");
-        userRegisterForm.setPassword("");
-        userRegisterForm.setRePassword("");
-        userRegisterForm.setUserFullName("");
-        userRegisterForm.setUserSexDivision("1");
-        userRegisterForm.setBirthDate("");
-        userRegisterForm.setCompanyFlag("1");
-        userRegisterForm.setCompanyName("");
-        userRegisterForm.setCompanyAddress("");
-        userRegisterForm.setCompanyEmail("");
-        userRegisterForm.setCompanyTelephone("");
-        userRegisterForm.setPlaceOfRegister("");
-        userRegisterForm.setInsuranceStartDate("");
-        userRegisterForm.setInsuranceEndDate("");
-    }
 }

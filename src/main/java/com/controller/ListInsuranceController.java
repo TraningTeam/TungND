@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.model.SearchInsuranceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,41 +28,42 @@ public class ListInsuranceController {
     @Autowired
     private UserService userService;
 
+
     /**
-     * @param action
-     * @param companyIdStr
-     * @param userFullName
-     * @param insuranceNumber
-     * @param placeOfRegister
-     * @param sortType
-     * @param currentPageStr
-     * @param session
-     * @return
+     * Get view of list insurance with method get
+     *
+     * @param action                 action of url
+     * @param companyIdSelectedStr   company id is selected by user
+     * @param searchInsuranceRequest object contains data of form
+     * @param sortType               sort type is selected by user
+     * @param currentPageStr         current page is selected by the user
+     * @param session                object to save data submit
+     * @return view of list insurance
      */
-    @GetMapping("/listInsurance")
+    @GetMapping(Constant.URL_LIST_INSURANCE)
     public ModelAndView listInsurance(@RequestParam(defaultValue = "") String action,
-                                      @RequestParam(value = "company_id", defaultValue = "0") String companyIdStr,
-                                      @RequestParam(value = "user_full_name", defaultValue = "") String userFullName,
-                                      @RequestParam(value = "insurance_number", defaultValue = "") String insuranceNumber,
-                                      @RequestParam(value = "place_of_register", defaultValue = "") String placeOfRegister,
-                                      @RequestParam(value = "sort_type", defaultValue = "ASC") String sortType,
-                                      @RequestParam(value = "current_page", defaultValue = "1") String currentPageStr,
+                                      @RequestParam(value = Constant.ATTRIBUTE_COMPANY_ID_SELECTED, defaultValue = "1") String companyIdSelectedStr,
+                                      @ModelAttribute SearchInsuranceRequest searchInsuranceRequest,
+                                      @RequestParam(value = Constant.ATTRIBUTE_SORT_TYPE, defaultValue = "ASC") String sortType,
+                                      @RequestParam(value = Constant.ATTRIBUTE_CURRENT_PAGE, defaultValue = "1") String currentPageStr,
                                       HttpSession session) {
         List<Company> companyList = companyService.findAllCompany();
-        ModelAndView modelAndView = new ModelAndView("list_insurance");
-        int companyIdSelected = Integer.parseInt(companyIdStr);
+        ModelAndView modelAndView = new ModelAndView(Constant.VIEW_LIST_INSURANCE);
+        int companyIdSelected = Integer.parseInt(companyIdSelectedStr);
+        String userFullName = searchInsuranceRequest.getUserFullName();
+        String insuranceNumber = searchInsuranceRequest.getInsuranceNumber();
+        String placeOfRegister = searchInsuranceRequest.getPlaceOfRegister();
         int currentPage = Integer.parseInt(currentPageStr);
-        if (action.isEmpty()) {
+        if (action.isEmpty() == true) {
             companyIdSelected = companyList.get(0).getCompanyInternalId();
-        }
-        if (action.equals("sort") || action.equals("paging") || action.equals("back")) {
-            companyIdSelected = (int) session.getAttribute("company_id_selected");
-            userFullName = (String) session.getAttribute("user_full_name");
-            insuranceNumber = (String) session.getAttribute("insurance_number");
-            placeOfRegister = (String) session.getAttribute("place_of_register");
-            if (action.equals("back")) {
-                currentPage = (int) session.getAttribute("current_page");
-            }
+        } else if (action.equals(Constant.ACTION_SEARCH_TYPE.SORT)
+                || action.equals(Constant.ACTION_SEARCH_TYPE.PAGING)
+                || action.equals(Constant.ACTION_SEARCH_TYPE.BACK)) {
+            companyIdSelected = (int) session.getAttribute(Constant.ATTRIBUTE_COMPANY_ID_SELECTED);
+            userFullName = (String) session.getAttribute(Constant.ATTRIBUTE_USER_FULL_NAME);
+            insuranceNumber = (String) session.getAttribute(Constant.ATTRIBUTE_INSURANCE_NUMBER);
+            placeOfRegister = (String) session.getAttribute(Constant.ATTRIBUTE_PLACE_OF_REGISTER);
+            currentPage = (int) session.getAttribute(Constant.ATTRIBUTE_CURRENT_PAGE);
         }
         int totalUser = userService.countTotalUser(companyIdSelected, userFullName, insuranceNumber,
                 placeOfRegister);
@@ -70,29 +73,23 @@ public class ListInsuranceController {
             int totalPage = Common.getTotalPage(totalUser, Constant.LIMIT_PAGE);
             int previousPage = Common.getPreviousPage(currentPage);
             int nextPage = Common.getNextPage(currentPage, totalPage);
-            List<User> userList = userService.searchUser(companyIdSelected, userFullName, insuranceNumber,
+            List<User> userList = userService.findUser(companyIdSelected, userFullName, insuranceNumber,
                     placeOfRegister, sortType, Constant.LIMIT_USER, offset);
-            session.setAttribute("company_id_selected", companyIdSelected);
-            session.setAttribute("user_full_name", userFullName);
-            session.setAttribute("insurance_number", insuranceNumber);
-            session.setAttribute("place_of_register", placeOfRegister);
-            session.setAttribute("sort_type", sortType);
-            session.setAttribute("current_page", currentPage);
+            session.setAttribute(Constant.ATTRIBUTE_COMPANY_ID_SELECTED, companyIdSelected);
+            session.setAttribute(Constant.ATTRIBUTE_SORT_TYPE, sortType);
+            session.setAttribute(Constant.ATTRIBUTE_CURRENT_PAGE, currentPage);
 
-            modelAndView.addObject("user_list", userList);
-            modelAndView.addObject("sort_type", sortType);
-            modelAndView.addObject("page_list", pageList);
-            modelAndView.addObject("previous_page", previousPage);
-            modelAndView.addObject("current_page", currentPage);
-            modelAndView.addObject("next_page", nextPage);
-            modelAndView.addObject("total_page", totalPage);
+            modelAndView.addObject(Constant.ATTRIBUTE_USER_LIST, userList);
+            modelAndView.addObject(Constant.ATTRIBUTE_SORT_TYPE, sortType);
+            modelAndView.addObject(Constant.ATTRIBUTE_PAGE_LIST, pageList);
+            modelAndView.addObject(Constant.ATTRIBUTE_PREVIOUS_PAGE, previousPage);
+            modelAndView.addObject(Constant.ATTRIBUTE_CURRENT_PAGE, currentPage);
+            modelAndView.addObject(Constant.ATTRIBUTE_NEXT_PAGE, nextPage);
+            modelAndView.addObject(Constant.ATTRIBUTE_TOTAL_PAGE, totalPage);
         }
-        modelAndView.addObject("company_list", companyList);
-        modelAndView.addObject("company_id_selected", companyIdSelected);
-        modelAndView.addObject("user_full_name", userFullName);
-        modelAndView.addObject("insurance_number", insuranceNumber);
-        modelAndView.addObject("place_of_register", placeOfRegister);
-        modelAndView.addObject("total_user", totalUser);
+        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY_LIST, companyList);
+        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY_ID_SELECTED, companyIdSelected);
+        modelAndView.addObject(Constant.ATTRIBUTE_TOTAL_USER, totalUser);
         return modelAndView;
     }
 }
