@@ -70,7 +70,7 @@
                 <td></td>
                 <td><label>
                     <input th:field="*{companyFlag}" id="radio_button_exist_company" type="radio"
-                           th:value="1" th:checked="*{companyFlag == '1'}"/>Công ty đã có</label>
+                           th:value="true" th:checked="*{companyFlag == true}"/>Công ty đã có</label>
                     <input type="hidden" id="company_flag" th:value="*{companyFlag}"/>
                 </td>
             </tr>
@@ -108,7 +108,7 @@
                 <td></td>
                 <td>
                     <label><input th:field="*{companyFlag}" id="radio_button_new_company" type="radio"
-                                  th:value="2" th:checked="*{companyFlag == '2'}"/>Đăng ký theo công ty
+                                  th:value="false" th:checked="*{companyFlag == false}"/>Đăng ký theo công ty
                         mới</label></td>
             </tr>
             <tr id="new_company">

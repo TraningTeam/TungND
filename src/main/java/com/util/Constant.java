@@ -74,11 +74,14 @@ public class Constant {
     /** View of add insurance */
     public static final String VIEW_ADD_INSURANCE = "add_insurance";
 
-    /** Flag of exist company */
-    public static final String FLAG_EXIST_COMPANY = "1";
+    /** View of error*/
+    public static final String VIEW_ERROR = "error_page";
 
     /** Flag of exist company */
-    public static final String FLAG_NEW_COMPANY = "2";
+    public static final boolean FLAG_EXIST_COMPANY = true;
+
+    /** Flag of exist company */
+    public static final boolean FLAG_NEW_COMPANY = false;
 
 
     public enum GENDER {
@@ -112,6 +115,6 @@ public class Constant {
 		/** PAGING */
 		PAGING,
 		/** BACK */
-		BACK;
-	}
+		BACK
+    }
 }

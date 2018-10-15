@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import com.util.Common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,13 +31,13 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            sql.append(" AND ins.insurance_number LIKE :insurance_number ");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         sql.append(" ORDER BY u.user_full_name ");
@@ -47,13 +48,13 @@ public class UserRepositoryImp implements UserRepository {
         sql.append(offset);
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            query.setParameter("insurance_number", "%" + insuranceNumber + "%");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            query.setParameter("insurance_number", insuranceNumber);
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();
@@ -70,24 +71,24 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            sql.append(" AND ins.insurance_number LIKE :insurance_number ");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString());
         query.setParameter("company_internal_id", companyInternalId);
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            query.setParameter("insurance_number", "%" + insuranceNumber + "%");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            query.setParameter("insurance_number", insuranceNumber);
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return ((BigInteger) query.getSingleResult()).intValue();
@@ -104,24 +105,24 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            sql.append(" AND ins.insurance_number LIKE :insurance_number ");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (userFullName.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (insuranceNumber.isEmpty() == false) {
-            query.setParameter("insurance_number", "%" + insuranceNumber + "%");
+        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+            query.setParameter("insurance_number", insuranceNumber);
         }
-        if (placeOfRegister.isEmpty() == false) {
+        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();

@@ -39,7 +39,7 @@ public class InsuranceValidation {
         String rePassword = registerInsuranceRequest.getRePassword();
         String userFullName = registerInsuranceRequest.getUserFullName();
         String birthDate = registerInsuranceRequest.getBirthDate();
-        String companyFlag = registerInsuranceRequest.getCompanyFlag();
+        boolean companyFlag = registerInsuranceRequest.getCompanyFlag();
         String companyName = registerInsuranceRequest.getCompanyName();
         String companyAddress = registerInsuranceRequest.getCompanyAddress();
         String companyEmail = registerInsuranceRequest.getCompanyEmail();
@@ -87,7 +87,7 @@ public class InsuranceValidation {
             errors.rejectValue("birthDate", "message.error.birth_date.01");
         }
 
-        if (companyFlag.equals(Constant.FLAG_NEW_COMPANY) == true) {
+        if (companyFlag == false) {
             if (Common.checkStringEmptyOrNull(companyName) == false) {
                 errors.rejectValue("companyName", "message.error.company_name.01");
             } else if (Common.checkMaxLength(companyName, 51) == false) {

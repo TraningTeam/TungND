@@ -60,8 +60,8 @@ public class UserServiceImp implements UserService {
     @Transactional
     public void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException {
         User user = new User(registerInsuranceRequest);
-        int companyId = 0;
-        if (registerInsuranceRequest.getCompanyFlag().equals(Constant.FLAG_EXIST_COMPANY)) {
+        int companyId;
+        if (registerInsuranceRequest.getCompanyFlag() == true) {
             companyId = Integer.parseInt(registerInsuranceRequest.getCompanyInternalId());
             user.setCompany(companyRepo.findCompanyById(companyId));
         } else {

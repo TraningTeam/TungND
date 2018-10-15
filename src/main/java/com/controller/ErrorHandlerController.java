@@ -19,7 +19,7 @@ public class ErrorHandlerController extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(SQLGrammarException.class)
     protected ModelAndView catchExceptionSQLGrammar() {
-        ModelAndView modelAndView = new ModelAndView("error_page");
+        ModelAndView modelAndView = new ModelAndView(Constant.VIEW_ERROR);
         modelAndView.addObject(Constant.ATTRIBUTE_STATUS_CODE, "500");
         modelAndView.addObject(Constant.ATTRIBUTE_MESSAGE, "Lỗi kết nối");
         return modelAndView;
@@ -32,7 +32,7 @@ public class ErrorHandlerController extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(ParseException.class)
     protected ModelAndView catchExceptionParse() {
-        ModelAndView modelAndView = new ModelAndView("error_page");
+        ModelAndView modelAndView = new ModelAndView(Constant.VIEW_ERROR);
         modelAndView.addObject(Constant.ATTRIBUTE_STATUS_CODE, "500");
         modelAndView.addObject(Constant.ATTRIBUTE_MESSAGE, "Lỗi convert ngày tháng");
         return modelAndView;

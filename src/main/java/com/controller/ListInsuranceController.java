@@ -36,7 +36,7 @@ public class ListInsuranceController {
      * @param companyIdSelectedStr   company id is selected by user
      * @param searchInsuranceRequest object contains data of form
      * @param sortType               sort type is selected by user
-     * @param currentPageStr         current page is selected by the user
+     * @param currentPageString         current page is selected by the user
      * @param session                object to save data submit
      * @return view of list insurance
      */
@@ -45,7 +45,7 @@ public class ListInsuranceController {
                                       @RequestParam(value = Constant.ATTRIBUTE_COMPANY_ID_SELECTED, defaultValue = "1") String companyIdSelectedStr,
                                       @ModelAttribute SearchInsuranceRequest searchInsuranceRequest,
                                       @RequestParam(value = Constant.ATTRIBUTE_SORT_TYPE, defaultValue = "ASC") String sortType,
-                                      @RequestParam(value = Constant.ATTRIBUTE_CURRENT_PAGE, defaultValue = "1") String currentPageStr,
+                                      @RequestParam(value = Constant.ATTRIBUTE_CURRENT_PAGE, defaultValue = "1") String currentPageString,
                                       HttpSession session) {
         List<Company> companyList = companyService.findAllCompany();
         ModelAndView modelAndView = new ModelAndView(Constant.VIEW_LIST_INSURANCE);
@@ -53,17 +53,23 @@ public class ListInsuranceController {
         String userFullName = searchInsuranceRequest.getUserFullName();
         String insuranceNumber = searchInsuranceRequest.getInsuranceNumber();
         String placeOfRegister = searchInsuranceRequest.getPlaceOfRegister();
-        int currentPage = Integer.parseInt(currentPageStr);
+        int currentPage = Integer.parseInt(currentPageString);
         if (action.isEmpty() == true) {
             companyIdSelected = companyList.get(0).getCompanyInternalId();
-        } else if (action.equals(Constant.ACTION_SEARCH_TYPE.SORT)
-                || action.equals(Constant.ACTION_SEARCH_TYPE.PAGING)
-                || action.equals(Constant.ACTION_SEARCH_TYPE.BACK)) {
+        }
+        if (action.equals(Constant.ACTION_SEARCH_TYPE.SORT.toString().toLowerCase()) == true
+                || action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase()) == true
+                || action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase()) == true) {
             companyIdSelected = (int) session.getAttribute(Constant.ATTRIBUTE_COMPANY_ID_SELECTED);
             userFullName = (String) session.getAttribute(Constant.ATTRIBUTE_USER_FULL_NAME);
             insuranceNumber = (String) session.getAttribute(Constant.ATTRIBUTE_INSURANCE_NUMBER);
             placeOfRegister = (String) session.getAttribute(Constant.ATTRIBUTE_PLACE_OF_REGISTER);
-            currentPage = (int) session.getAttribute(Constant.ATTRIBUTE_CURRENT_PAGE);
+            if (action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase()) == true) {
+                currentPage = (int) session.getAttribute(Constant.ATTRIBUTE_CURRENT_PAGE);
+            }
+            if (action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase()) == true) {
+                sortType = (String) session.getAttribute(Constant.ATTRIBUTE_SORT_TYPE);
+            }
         }
         int totalUser = userService.countTotalUser(companyIdSelected, userFullName, insuranceNumber,
                 placeOfRegister);

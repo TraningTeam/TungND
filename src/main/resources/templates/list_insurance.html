@@ -7,7 +7,7 @@
 <form method="GET" th:action="@{/listInsurance}" th:object="${searchInsuranceRequest}">
     <div style="margin-left: 10px">
         <p>Tên công ty</p>
-        <select th:name="${company_id_selected}" id="company_internal_id">
+        <select th:name="company_id_selected" id="company_internal_id">
             <option th:each="company:${company_list}" th:value="${company.companyInternalId}"
                     th:utext="${company.companyName}"
                     th:selected="${company.companyInternalId == company_id_selected}"></option>
@@ -103,7 +103,7 @@
            th:unless="${page == current_page}"></a>
         <span th:if="${total_page > page}">&#124;</span>
     </th:block>
-    <a th:if="${total_page > current_page}" th:href="@{/listInsurance(current_page=${next_page},action=paging)}">&gt;&gt;</a>
+    <a th:if="${total_page > current_page}" th:href="@{/listInsurance(current_page=${next_page},action=PAGING)}">&gt;&gt;</a>
 </div>
 <script>
     $("#company_internal_id").change(function () {

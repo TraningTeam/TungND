@@ -16,7 +16,7 @@ public class RegisterInsuranceRequest {
 	
 	private String birthDate;
 	
-	private String companyFlag;
+	private boolean companyFlag;
 	
 	private String companyInternalId;
 	
@@ -43,7 +43,7 @@ public class RegisterInsuranceRequest {
 		this.userFullName = "";
 		this.userSexDivision = "1";
 		this.birthDate = "";
-		this.companyFlag = "1";
+		this.companyFlag = true;
 		this.companyName = "";
 		this.companyAddress = "";
 		this.companyEmail = "";
@@ -117,11 +117,11 @@ public class RegisterInsuranceRequest {
 		this.companyInternalId = companyInternalId;
 	}
 	
-	public String getCompanyFlag() {
+	public boolean getCompanyFlag() {
 		return companyFlag;
 	}
 	
-	public void setCompanyFlag(String companyFlag) {
+	public void setCompanyFlag(boolean companyFlag) {
 		this.companyFlag = companyFlag;
 	}
 	
