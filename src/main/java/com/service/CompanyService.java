@@ -23,10 +23,10 @@ public interface CompanyService {
     Company findCompanyById(int companyId);
 
     /**
-     * Find company by id
+     * Check company name existed or not
      *
      * @param companyName company name
-     * @return an object company
+     * @return true if company name not exist and false if company name existed
      */
     boolean checkExistCompanyByCompanyName(String companyName);
 }

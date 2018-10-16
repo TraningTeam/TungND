@@ -58,9 +58,10 @@ public interface UserService {
      * Save insurance data
      *
      * @param registerInsuranceRequest object contains all data to register
-     * @throws ParseException if convert a date invalid
+     * @throws ParseException   if convert a date invalid
+     * @throws RuntimeException if save object to has error
      */
-    void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException;
+    void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException;
 
     /**
      * Get data user map

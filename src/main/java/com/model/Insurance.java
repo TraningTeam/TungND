@@ -1,6 +1,7 @@
 package com.model;
 
 import com.util.Common;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,11 +36,11 @@ public class Insurance {
     public Insurance() {
     }
 
-    public Insurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException {
+    public Insurance(RegisterInsuranceRequest registerInsuranceRequest, Common common) throws ParseException {
         this.insuranceNumber = registerInsuranceRequest.getInsuranceNumber();
         this.placeOfRegister = registerInsuranceRequest.getPlaceOfRegister();
-        this.insuranceStartDate = Common.convertStringToDate(registerInsuranceRequest.getInsuranceStartDate());
-        this.insuranceEndDate = Common.convertStringToDate(registerInsuranceRequest.getInsuranceEndDate());
+        this.insuranceStartDate = common.convertStringToDate(registerInsuranceRequest.getInsuranceStartDate());
+        this.insuranceEndDate = common.convertStringToDate(registerInsuranceRequest.getInsuranceEndDate());
     }
 
     public int getInsuranceInternalId() {

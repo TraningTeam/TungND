@@ -2,17 +2,14 @@ package com.service.imp;
 
 import com.model.Company;
 import com.model.SearchInsuranceRequest;
-import com.model.User;
+import com.repository.InsuranceRepository;
 import com.service.CompanyService;
+import com.service.InsuranceService;
 import com.service.UserService;
 import com.util.Common;
 import com.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.repository.InsuranceRepository;
-import com.service.InsuranceService;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -31,6 +28,12 @@ public class InsuranceServiceImp implements InsuranceService {
     @Autowired
     private UserService userService;
 
+    /**
+     * Check insurance number exist or not
+     *
+     * @param insuranceNumber insurance number
+     * @return true if insurance number not exist and false if insurance number existed
+     */
     @Override
     public boolean checkExistInsuranceNumber(String insuranceNumber) {
         if (insuranceRepo.findInsuranceByInsuranceNumber(insuranceNumber) == null) {
@@ -39,6 +42,17 @@ public class InsuranceServiceImp implements InsuranceService {
         return false;
     }
 
+    /**
+     * Get insurance map data
+     *
+     * @param action                 action of url
+     * @param companyIdSelectedStr   company id is selected by user
+     * @param searchInsuranceRequest object contains data of form
+     * @param sortType               sort type is selected by user
+     * @param currentPageString      current page is selected by the user
+     * @param session                object to save data submit
+     * @return a map insurance data
+     */
     @Override
     public Map<String, Object> getInsuranceMapData(String action, String companyIdSelectedStr, SearchInsuranceRequest searchInsuranceRequest, String sortType, String currentPageString, HttpSession session) {
         Map<String, Object> insuranceMap = new HashMap<>();

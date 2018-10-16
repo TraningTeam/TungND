@@ -1,18 +1,15 @@
 package com.repository.imp;
 
-import java.math.BigInteger;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-
+import com.model.User;
+import com.repository.UserRepository;
 import com.util.Common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.model.User;
-import com.repository.UserRepository;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.math.BigInteger;
+import java.util.List;
 
 @Repository
 public class UserRepositoryImp implements UserRepository {
@@ -20,6 +17,21 @@ public class UserRepositoryImp implements UserRepository {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    Common common;
+
+    /**
+     * Find all user with condition search
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @param sortType          sort type of user full name
+     * @param limit             limit of user found
+     * @param offset            index of start user in database
+     * @return list user
+     */
     @Override
     public List<User> findUser(int companyInternalId, String userFullName, String insuranceNumber,
                                String placeOfRegister, String sortType, int limit, int offset) {
@@ -31,13 +43,13 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         sql.append(" ORDER BY u.user_full_name ");
@@ -48,18 +60,27 @@ public class UserRepositoryImp implements UserRepository {
         sql.append(offset);
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();
     }
 
+    /**
+     * Count total user with condition search
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @return total user
+     */
     @Override
     public int countTotalUser(int companyInternalId, String userFullName, String insuranceNumber,
                               String placeOfRegister) {
@@ -71,29 +92,38 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString());
         query.setParameter("company_internal_id", companyInternalId);
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return ((BigInteger) query.getSingleResult()).intValue();
     }
 
+    /**
+     * Find user with condition search to export
+     *
+     * @param companyInternalId company id
+     * @param userFullName      user full name
+     * @param insuranceNumber   insurance number
+     * @param placeOfRegister   place of register
+     * @return list user
+     */
     @Override
     public List<User> findUserDataToExport(int companyInternalId, String userFullName, String insuranceNumber,
                                            String placeOfRegister) {
@@ -105,29 +135,35 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (Common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName) == true) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (Common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (Common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();
     }
 
+    /**
+     * Check user existed or not
+     *
+     * @param userName user name
+     * @return true if user not exist and false if user existed
+     */
     @Override
     public boolean checkExistUserByUserName(String userName) {
         StringBuilder sql = new StringBuilder();
@@ -141,6 +177,11 @@ public class UserRepositoryImp implements UserRepository {
         return false;
     }
 
+    /**
+     * Save user data into database
+     *
+     * @param user object user contains data
+     */
     @Override
     public void saveUser(User user) {
         StringBuilder sql = new StringBuilder();

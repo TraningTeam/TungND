@@ -1,14 +1,8 @@
 package com.controller;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import com.model.Insurance;
 import com.model.SearchInsuranceRequest;
 import com.service.InsuranceService;
+import com.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,22 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.model.Company;
-import com.model.User;
-import com.service.CompanyService;
-import com.service.UserService;
-import com.util.Common;
-import com.util.Constant;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class ListInsuranceController {
 
     @Autowired
-    private CompanyService companyService;
-
-    @Autowired
     private InsuranceService insuranceService;
-
 
     /**
      * Get view of list insurance with method get

@@ -9,6 +9,7 @@ import com.util.Constant;
 import com.validate.InsuranceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
 
@@ -35,6 +37,8 @@ public class AddInsuranceController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private Common common;
 
     /**
      * Get view of add insurance with method get
@@ -43,11 +47,14 @@ public class AddInsuranceController {
      * @return view of add insurance
      */
     @GetMapping(Constant.URL_ADD_INSURANCE)
-    public ModelAndView addInsurance(@ModelAttribute RegisterInsuranceRequest registerInsuranceRequest) {
+    public ModelAndView addInsurance(@ModelAttribute RegisterInsuranceRequest registerInsuranceRequest,
+                                     HttpSession session) {
         List<Company> companyList = companyService.findAllCompany();
+        Company company = companyService.findCompanyById((int) session.getAttribute(Constant.ATTRIBUTE_COMPANY_ID_SELECTED));
+        registerInsuranceRequest.setCompanyInternalId(String.valueOf(company.getCompanyInternalId()));
         ModelAndView modelAndView = new ModelAndView("add_insurance");
         modelAndView.addObject(Constant.ATTRIBUTE_COMPANY_LIST, companyList);
-        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY, companyList.get(0));
+        modelAndView.addObject(Constant.ATTRIBUTE_COMPANY, company);
         return modelAndView;
     }
 
@@ -55,7 +62,7 @@ public class AddInsuranceController {
      * Get view of add insurance or get view of list insurance with method post
      *
      * @param registerInsuranceRequest form contains field to register
-     * @param errors                   object contains all of error
+     * @param errors            object contains all of error
      * @return redirect to url /listInsurance if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is false
      * Or view of add insurance if if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is true
      * @throws ParseException if date field into {@code registerInsuranceRequest} convert by {@date format} is invalid
@@ -98,7 +105,7 @@ public class AddInsuranceController {
     @RequestMapping(value = "/formatName", method = RequestMethod.GET)
     @ResponseBody
     public String formatName(@RequestParam(value = "name", defaultValue = "") String name) {
-        return Common.formatText(name);
+        return common.formatText(name);
     }
 
 }

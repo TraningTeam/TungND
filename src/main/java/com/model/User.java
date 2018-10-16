@@ -1,9 +1,7 @@
 package com.model;
 
 import com.util.Common;
-
-import java.text.ParseException;
-import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.text.ParseException;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_user")
@@ -50,13 +50,13 @@ public class User {
     public User() {
     }
 
-    public User(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException {
+    public User(RegisterInsuranceRequest registerInsuranceRequest, Common common) throws ParseException {
         this.userFullName = registerInsuranceRequest.getUserFullName();
         this.userName = registerInsuranceRequest.getUserName();
         this.password = registerInsuranceRequest.getPassword();
         this.userSexDivision = registerInsuranceRequest.getUserSexDivision().charAt(0);
-        if (Common.checkStringEmptyOrNull(registerInsuranceRequest.getBirthDate()) == true) {
-            this.birthDate = Common.convertStringToDate(registerInsuranceRequest.getBirthDate());
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getBirthDate()) == true) {
+            this.birthDate = common.convertStringToDate(registerInsuranceRequest.getBirthDate());
         }
     }
 

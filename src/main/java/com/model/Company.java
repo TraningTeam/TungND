@@ -1,6 +1,8 @@
 package com.model;
 
+
 import com.util.Common;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,17 +31,16 @@ public class Company {
     @Column(name = "telephone")
     private String telephone;
 
-
     public Company() {
     }
 
-    public Company(RegisterInsuranceRequest registerInsuranceRequest) {
+    public Company(RegisterInsuranceRequest registerInsuranceRequest, Common common) {
         this.companyName = registerInsuranceRequest.getCompanyName();
         this.address = registerInsuranceRequest.getCompanyAddress();
-        if (Common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyEmail()) == true) {
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyEmail()) == true) {
             this.email = registerInsuranceRequest.getCompanyEmail();
         }
-        if (Common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyTelephone()) == true) {
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyTelephone()) == true) {
             this.telephone = registerInsuranceRequest.getCompanyTelephone();
         }
     }
