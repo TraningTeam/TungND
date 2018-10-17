@@ -2,7 +2,6 @@ package com.model;
 
 
 import com.util.Common;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,10 +36,10 @@ public class Company {
     public Company(RegisterInsuranceRequest registerInsuranceRequest, Common common) {
         this.companyName = registerInsuranceRequest.getCompanyName();
         this.address = registerInsuranceRequest.getCompanyAddress();
-        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyEmail()) == true) {
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyEmail())) {
             this.email = registerInsuranceRequest.getCompanyEmail();
         }
-        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyTelephone()) == true) {
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getCompanyTelephone())) {
             this.telephone = registerInsuranceRequest.getCompanyTelephone();
         }
     }

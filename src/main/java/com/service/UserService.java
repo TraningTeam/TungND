@@ -1,11 +1,11 @@
 package com.service;
 
+import com.model.RegisterInsuranceRequest;
+import com.model.User;
+
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
-
-import com.model.User;
-import com.model.RegisterInsuranceRequest;
 
 public interface UserService {
 
@@ -55,13 +55,13 @@ public interface UserService {
     boolean checkExistUserByUserName(String userName);
 
     /**
-     * Save insurance data
+     * Save user data
      *
      * @param registerInsuranceRequest object contains all data to register
      * @throws ParseException   if convert a date invalid
      * @throws RuntimeException if save object to has error
      */
-    void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException;
+    void saveUser(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException;
 
     /**
      * Get data user map

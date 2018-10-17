@@ -43,13 +43,13 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         sql.append(" ORDER BY u.user_full_name ");
@@ -60,13 +60,13 @@ public class UserRepositoryImp implements UserRepository {
         sql.append(offset);
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();
@@ -92,24 +92,24 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString());
         query.setParameter("company_internal_id", companyInternalId);
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return ((BigInteger) query.getSingleResult()).intValue();
@@ -135,24 +135,24 @@ public class UserRepositoryImp implements UserRepository {
                         " INNER JOIN tbl_insurance ins " +
                         " ON u.insurance_internal_id = ins.insurance_internal_id " +
                         " WHERE u.company_internal_id = :company_internal_id ");
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             sql.append(" AND u.user_full_name LIKE :user_full_name ");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             sql.append(" AND ins.insurance_number = :insurance_number ");
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             sql.append(" AND ins.place_of_register LIKE :place_of_register ");
         }
         Query query = entityManager.createNativeQuery(sql.toString(), User.class);
         query.setParameter("company_internal_id", companyInternalId);
-        if (common.checkStringEmptyOrNull(userFullName) == true) {
+        if (common.checkStringEmptyOrNull(userFullName)) {
             query.setParameter("user_full_name", "%" + userFullName + "%");
         }
-        if (common.checkStringEmptyOrNull(insuranceNumber) == true) {
+        if (common.checkStringEmptyOrNull(insuranceNumber)) {
             query.setParameter("insurance_number", insuranceNumber);
         }
-        if (common.checkStringEmptyOrNull(placeOfRegister) == true) {
+        if (common.checkStringEmptyOrNull(placeOfRegister)) {
             query.setParameter("place_of_register", "%" + placeOfRegister + "%");
         }
         return query.getResultList();

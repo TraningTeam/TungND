@@ -105,10 +105,10 @@ public class UserServiceImp implements UserService {
      */
     @Override
     @Transactional
-    public void saveInsurance(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException {
+    public void saveUser(RegisterInsuranceRequest registerInsuranceRequest) throws ParseException, RuntimeException {
         User user = new User(registerInsuranceRequest, common);
         int companyId;
-        if (registerInsuranceRequest.getCompanyFlag() == true) {
+        if (registerInsuranceRequest.getCompanyFlag()) {
             companyId = Integer.parseInt(registerInsuranceRequest.getCompanyInternalId());
             user.setCompany(companyRepo.findCompanyById(companyId));
         } else {

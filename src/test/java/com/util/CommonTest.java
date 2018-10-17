@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class CommonTest {
 
@@ -33,7 +35,7 @@ public class CommonTest {
         List<Integer> pagingList = new ArrayList<>();
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -48,7 +50,7 @@ public class CommonTest {
         List<Integer> pagingList = Arrays.asList(1);
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -63,7 +65,7 @@ public class CommonTest {
         List<Integer> pagingList = Arrays.asList(1);
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -78,7 +80,7 @@ public class CommonTest {
         List<Integer> pagingList = Arrays.asList(1, 2, 3, 4, 5);
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -93,7 +95,7 @@ public class CommonTest {
         List<Integer> pagingList = Arrays.asList(2, 3, 4, 5, 6);
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -108,7 +110,7 @@ public class CommonTest {
         List<Integer> pagingList = Arrays.asList(2, 3, 4, 5, 6);
 
         //verify
-        Assert.assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
+        assertEquals(sut.getListPaging(totalUser, currentPage, limitPage), pagingList);
     }
 
     /**
@@ -122,7 +124,7 @@ public class CommonTest {
         int nextPage = 0;
 
         //verify
-        Assert.assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
+        assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
     }
 
     /**
@@ -136,7 +138,7 @@ public class CommonTest {
         int nextPage = 0;
 
         //verify
-        Assert.assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
+        assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
     }
 
     /**
@@ -150,7 +152,7 @@ public class CommonTest {
         int nextPage = 2;
 
         //verify
-        Assert.assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
+        assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
     }
 
     /**
@@ -164,7 +166,7 @@ public class CommonTest {
         int nextPage = 0;
 
         //verify
-        Assert.assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
+        assertEquals(sut.getNextPage(currentPage, totalPage), nextPage);
     }
 
     /**
@@ -177,7 +179,7 @@ public class CommonTest {
         int previousPage = 1;
 
         //verify
-        Assert.assertEquals(sut.getPreviousPage(startPage), previousPage);
+        assertEquals(sut.getPreviousPage(startPage), previousPage);
     }
 
     /**
@@ -191,7 +193,7 @@ public class CommonTest {
         int startPage = 1;
 
         //verify
-        Assert.assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
+        assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
     }
 
     /**
@@ -205,7 +207,7 @@ public class CommonTest {
         int startPage = 1;
 
         //verify
-        Assert.assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
+        assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
     }
 
     /**
@@ -219,7 +221,7 @@ public class CommonTest {
         int startPage = 1;
 
         //verify
-        Assert.assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
+        assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
     }
 
     /**
@@ -233,7 +235,7 @@ public class CommonTest {
         int startPage = 2;
 
         //verify
-        Assert.assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
+        assertEquals(sut.getStartPage(currentPage, totalPage), startPage);
     }
 
     /**
@@ -248,7 +250,7 @@ public class CommonTest {
         int endPage = 0;
 
         //verify
-        Assert.assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
+        assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
     }
 
     /**
@@ -263,7 +265,7 @@ public class CommonTest {
         int endPage = 5;
 
         //verify
-        Assert.assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
+        assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
     }
 
     /**
@@ -278,7 +280,7 @@ public class CommonTest {
         int endPage = 6;
 
         //verify
-        Assert.assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
+        assertEquals(sut.getEndPage(startPage, limitPage, totalPage), endPage);
     }
 
     /**
@@ -292,7 +294,7 @@ public class CommonTest {
         int totalPage = 0;
 
         //verify
-        Assert.assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
+        assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
     }
 
     /**
@@ -306,7 +308,7 @@ public class CommonTest {
         int totalPage = 2;
 
         //verify
-        Assert.assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
+        assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
     }
 
     /**
@@ -320,7 +322,7 @@ public class CommonTest {
         int totalPage = 3;
 
         //verify
-        Assert.assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
+        assertEquals(sut.getTotalPage(totalUser, limitPage), totalPage);
     }
 
     /**
@@ -333,7 +335,7 @@ public class CommonTest {
         int offset = 0;
 
         //verify
-        Assert.assertEquals(sut.getOffset(currentPage), offset);
+        assertEquals(sut.getOffset(currentPage), offset);
     }
 
     /**
@@ -346,7 +348,7 @@ public class CommonTest {
         int offset = 5;
 
         //verify
-        Assert.assertEquals(sut.getOffset(currentPage), offset);
+        assertEquals(sut.getOffset(currentPage), offset);
     }
 
     /**
@@ -359,7 +361,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkStringEmptyOrNull(text), check);
+        assertEquals(sut.checkStringEmptyOrNull(text), check);
     }
 
     /**
@@ -372,7 +374,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkStringEmptyOrNull(text), check);
+        assertEquals(sut.checkStringEmptyOrNull(text), check);
     }
 
     /**
@@ -385,7 +387,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkStringEmptyOrNull(text), check);
+        assertEquals(sut.checkStringEmptyOrNull(text), check);
     }
 
     /**
@@ -398,7 +400,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkRegexInsuranceNumber(text), check);
+        assertEquals(sut.checkRegexInsuranceNumber(text), check);
     }
 
     /**
@@ -411,7 +413,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkRegexInsuranceNumber(text), check);
+        assertEquals(sut.checkRegexInsuranceNumber(text), check);
     }
 
     /**
@@ -424,7 +426,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkRegexInsuranceNumber(text), check);
+        assertEquals(sut.checkRegexInsuranceNumber(text), check);
     }
 
     /**
@@ -437,7 +439,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkRegexInsuranceNumber(text), check);
+        assertEquals(sut.checkRegexInsuranceNumber(text), check);
     }
 
     /**
@@ -451,7 +453,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkMaxLength(text, maxLength), check);
+        assertEquals(sut.checkMaxLength(text, maxLength), check);
     }
 
     /**
@@ -465,7 +467,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkMaxLength(text, maxLength), check);
+        assertEquals(sut.checkMaxLength(text, maxLength), check);
     }
 
     /**
@@ -479,7 +481,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkMaxLength(text, maxLength), check);
+        assertEquals(sut.checkMaxLength(text, maxLength), check);
     }
 
     /**
@@ -493,7 +495,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -507,7 +509,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -521,7 +523,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -535,7 +537,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -549,7 +551,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -563,7 +565,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -577,7 +579,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -591,7 +593,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -605,7 +607,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -619,7 +621,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -633,7 +635,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
+        assertEquals(sut.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate), check);
     }
 
     /**
@@ -646,7 +648,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkRegexTelephone(text), check);
+        assertEquals(sut.checkRegexTelephone(text), check);
     }
 
     /**
@@ -659,7 +661,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkRegexTelephone(text), check);
+        assertEquals(sut.checkRegexTelephone(text), check);
     }
 
     /**
@@ -672,7 +674,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkRegexTelephone(text), check);
+        assertEquals(sut.checkRegexTelephone(text), check);
     }
 
     /**
@@ -685,7 +687,7 @@ public class CommonTest {
         String dateString = "31/01/2018";
 
         //verify
-        Assert.assertEquals(sut.formatDate(date), dateString);
+        assertEquals(sut.formatDate(date), dateString);
     }
 
     /**
@@ -698,7 +700,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkFormatDate(dateString), check);
+        assertEquals(sut.checkFormatDate(dateString), check);
     }
 
     /**
@@ -711,7 +713,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkFormatDate(dateString), check);
+        assertEquals(sut.checkFormatDate(dateString), check);
     }
 
     /**
@@ -724,7 +726,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkFormatDate(dateString), check);
+        assertEquals(sut.checkFormatDate(dateString), check);
     }
 
     /**
@@ -737,7 +739,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkFormatDate(dateString), check);
+        assertEquals(sut.checkFormatDate(dateString), check);
     }
 
     /**
@@ -751,7 +753,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
     }
 
     /**
@@ -765,7 +767,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
     }
 
     /**
@@ -779,7 +781,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
     }
 
     /**
@@ -793,7 +795,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
     }
 
     /**
@@ -807,7 +809,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
     }
 
     /**
@@ -821,11 +823,11 @@ public class CommonTest {
 
         //verify
         try {
-            Assert.assertEquals(sut.convertStringToDate(dateString), date);
+            assertEquals(sut.convertStringToDate(dateString), date);
             Assert.fail();
         } catch (ParseException parseException) {
             String expectedMessage = "Unparseable date: \"01/31/1995\"";
-            Assert.assertEquals(expectedMessage, parseException.getMessage());
+            assertEquals(expectedMessage, parseException.getMessage());
         }
     }
 
@@ -840,11 +842,11 @@ public class CommonTest {
 
         //verify
         try {
-            Assert.assertEquals(sut.convertStringToDate(dateString), date);
+            assertEquals(sut.convertStringToDate(dateString), date);
             Assert.fail();
         } catch (ParseException parseException) {
             String expectedMessage = "Unparseable date: \"29/02/2018\"";
-            Assert.assertEquals(expectedMessage, parseException.getMessage());
+            assertEquals(expectedMessage, parseException.getMessage());
         }
     }
 
@@ -860,7 +862,7 @@ public class CommonTest {
         Date date = new Date(118, 00, 31);
 
         //verify
-        Assert.assertEquals(sut.convertStringToDate(dateString), date);
+        assertEquals(sut.convertStringToDate(dateString), date);
     }
 
     /**
@@ -873,7 +875,7 @@ public class CommonTest {
         String result = "Nguyen Duong Tung ";
 
         //verify
-        Assert.assertEquals(sut.formatText(text), result);
+        assertEquals(sut.formatText(text), result);
     }
 
     /**
@@ -886,7 +888,7 @@ public class CommonTest {
         String result = "nguyen tung";
 
         //verify
-        Assert.assertEquals(sut.unAccent(text), result);
+        assertEquals(sut.unAccent(text), result);
     }
 
     /**
@@ -900,7 +902,7 @@ public class CommonTest {
         boolean check = false;
 
         //verify
-        Assert.assertEquals(sut.compareString(text1, text2), check);
+        assertEquals(sut.compareString(text1, text2), check);
     }
 
     /**
@@ -914,7 +916,7 @@ public class CommonTest {
         boolean check = true;
 
         //verify
-        Assert.assertEquals(sut.compareString(text1, text2), check);
+        assertEquals(sut.compareString(text1, text2), check);
     }
 
     /**
@@ -927,6 +929,6 @@ public class CommonTest {
         dateFormat.setLenient(false);
 
         //verify
-        Assert.assertEquals(sut.setFormatValidDate(), dateFormat);
+        assertEquals(sut.setFormatValidDate(), dateFormat);
     }
 }

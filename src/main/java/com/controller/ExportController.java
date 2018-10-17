@@ -70,13 +70,13 @@ public class ExportController {
         contents.append("\n");
         contents.append("Email");
         contents.append(",");
-        if (common.checkStringEmptyOrNull(company.getEmail()) == true) {
+        if (common.checkStringEmptyOrNull(company.getEmail())) {
             contents.append(company.getEmail());
         }
         contents.append("\n");
         contents.append("Số điện thoại");
         contents.append(",");
-        if (common.checkStringEmptyOrNull(company.getTelephone()) == true) {
+        if (common.checkStringEmptyOrNull(company.getTelephone())) {
             contents.append(company.getTelephone());
         }
         contents.append("\n\n");

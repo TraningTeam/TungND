@@ -56,9 +56,12 @@ public class InsuranceValidation {
         validateBirthDate(birthDate, errors);
         validateCompanyInfomation(companyFlag, companyName, companyAddress, companyEmail, companyTelephone, errors);
         validatePlaceOfRegister(placeOfRegister, errors);
-        validateInsuranceStartDateAndInsuranceEndDate(insuranceStartDate, insuranceEndDate, errors);
+        validateInsuranceStartDate(insuranceStartDate, errors);
+        validateInsuranceEndDate(insuranceEndDate, errors);
+        validateInsuranceStartDateAndEndDate(insuranceStartDate, insuranceEndDate, errors);
         return errors.hasErrors();
     }
+
 
     /**
      * Validate {@code insuranceNumber}
@@ -115,14 +118,15 @@ public class InsuranceValidation {
      */
     public void validatePasswordAndRePassword(String password, String rePassword, Errors errors) {
         if (common.checkStringEmptyOrNull(password) == false) {
-            errors.rejectValue("userName", "message.error.password.01");
-        } else if (common.checkMaxLength(password, 33) == false) {
-            errors.rejectValue("userName", "message.error.password.02");
-        }
-        if (common.checkStringEmptyOrNull(password) == true
-                && common.checkStringEmptyOrNull(rePassword) == true
-                && common.compareString(password, rePassword) == false) {
-            errors.rejectValue("userName", "message.error.re_password.01");
+            errors.rejectValue("password", "message.error.password.01");
+        } else {
+            if (common.checkMaxLength(password, 33) == false) {
+                errors.rejectValue("password", "message.error.password.02");
+            }
+            if (common.checkStringEmptyOrNull(rePassword)
+                    && common.compareString(password, rePassword) == false) {
+                errors.rejectValue("rePassword", "message.error.re_password.01");
+            }
         }
     }
 
@@ -133,7 +137,7 @@ public class InsuranceValidation {
      * @param errors    object contains all of error
      */
     public void validateBirthDate(String birthDate, Errors errors) {
-        if (common.checkStringEmptyOrNull(birthDate) == true &&
+        if (common.checkStringEmptyOrNull(birthDate) &&
                 (common.checkFormatDate(birthDate) == false
                         || common.checkValidBirthdate(birthDate, Calendar.getInstance().getTime()) == false)) {
             errors.rejectValue("birthDate", "message.error.birth_date.01");
@@ -152,26 +156,66 @@ public class InsuranceValidation {
      */
     public void validateCompanyInfomation(boolean companyFlag, String companyName, String companyAddress, String companyEmail, String companyTelephone, Errors errors) {
         if (companyFlag == false) {
-            if (common.checkStringEmptyOrNull(companyName) == false) {
-                errors.rejectValue("companyName", "message.error.company_name.01");
-            } else if (common.checkMaxLength(companyName, 51) == false) {
-                errors.rejectValue("companyName", "message.error.company_name.02");
-            } else if (companyService.checkExistCompanyByCompanyName(companyName) == false) {
-                errors.rejectValue("companyName", "message.error.company_name.03");
-            }
-            if (common.checkStringEmptyOrNull(companyAddress) == false) {
-                errors.rejectValue("companyAddress", "message.error.company_address.01");
-            } else if (common.checkMaxLength(companyAddress, 101) == false) {
-                errors.rejectValue("companyAddress", "message.error.company_address.02");
-            }
-            if (common.checkStringEmptyOrNull(companyEmail) == true
-                    && common.checkMaxLength(companyEmail, 51) == false) {
-                errors.rejectValue("companyEmail", "message.error.company_email.01");
-            }
-            if (common.checkStringEmptyOrNull(companyTelephone) == true
-                    && common.checkRegexTelephone(companyTelephone) == false) {
-                errors.rejectValue("companyTelephone", "message.error.company_telephone.01");
-            }
+            validateCompanyName(companyName, errors);
+            validateCompanyAddress(companyAddress, errors);
+            validateCompanyEmail(companyEmail, errors);
+            validateCompanyTelephone(companyTelephone, errors);
+        }
+    }
+
+    /**
+     * Validate {@code companyName}
+     *
+     * @param companyName field company name to validate
+     * @param errors      object contains all of error
+     */
+    public void validateCompanyName(String companyName, Errors errors) {
+        if (common.checkStringEmptyOrNull(companyName) == false) {
+            errors.rejectValue("companyName", "message.error.company_name.01");
+        } else if (common.checkMaxLength(companyName, 51) == false) {
+            errors.rejectValue("companyName", "message.error.company_name.02");
+        } else if (companyService.checkExistCompanyByCompanyName(companyName) == false) {
+            errors.rejectValue("companyName", "message.error.company_name.03");
+        }
+    }
+
+    /**
+     * Validate {@code companyAddress}
+     *
+     * @param companyAddress field company address to validate
+     * @param errors         object contains all of error
+     */
+    public void validateCompanyAddress(String companyAddress, Errors errors) {
+        if (common.checkStringEmptyOrNull(companyAddress) == false) {
+            errors.rejectValue("companyAddress", "message.error.company_address.01");
+        } else if (common.checkMaxLength(companyAddress, 101) == false) {
+            errors.rejectValue("companyAddress", "message.error.company_address.02");
+        }
+    }
+
+    /**
+     * Validate {@code companyEmail}
+     *
+     * @param companyEmail field company email to validate
+     * @param errors       object contains all of error
+     */
+    public void validateCompanyEmail(String companyEmail, Errors errors) {
+        if (common.checkStringEmptyOrNull(companyEmail)
+                && common.checkMaxLength(companyEmail, 51) == false) {
+            errors.rejectValue("companyEmail", "message.error.company_email.01");
+        }
+    }
+
+    /**
+     * Validate {@code companyTelephone}
+     *
+     * @param companyTelephone field company telephone to validate
+     * @param errors           object contains all of error
+     */
+    public void validateCompanyTelephone(String companyTelephone, Errors errors) {
+        if (common.checkStringEmptyOrNull(companyTelephone)
+                && common.checkRegexTelephone(companyTelephone) == false) {
+            errors.rejectValue("companyTelephone", "message.error.company_telephone.01");
         }
     }
 
@@ -191,23 +235,45 @@ public class InsuranceValidation {
     }
 
     /**
+     * Validate {@code insuranceStartDate}
+     *
+     * @param insuranceStartDate field insurance start date to validate
+     * @param errors             object contains all of error
+     */
+    public void validateInsuranceStartDate(String insuranceStartDate, Errors errors) {
+        if (common.checkStringEmptyOrNull(insuranceStartDate) == false) {
+            errors.rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
+        } else if (common.checkFormatDate(insuranceStartDate) == false) {
+            errors.rejectValue("insuranceStartDate", "message.error.insurance_start_date.02");
+        }
+    }
+
+    /**
+     * Validate {@code insuranceEndDate}
+     *
+     * @param insuranceEndDate field insurance end date to validate
+     * @param errors           object contains all of error
+     */
+    public void validateInsuranceEndDate(String insuranceEndDate, Errors errors) {
+        if (common.checkStringEmptyOrNull(insuranceEndDate) == false) {
+            errors.rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
+        } else if (common.checkFormatDate(insuranceEndDate) == false) {
+            errors.rejectValue("insuranceEndDate", "message.error.insurance_end_date.02");
+        }
+    }
+
+    /**
      * Validate {@code insuranceStartDate} and {@code insuranceEndDate}
      *
      * @param insuranceStartDate field insurance start date to validate
      * @param insuranceEndDate   field insurance end date to validate
      * @param errors             object contains all of error
      */
-    public void validateInsuranceStartDateAndInsuranceEndDate(String insuranceStartDate, String
-            insuranceEndDate, Errors errors) {
-        if (common.checkStringEmptyOrNull(insuranceStartDate) == false) {
-            errors.rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
-        } else if (common.checkFormatDate(insuranceStartDate) == false) {
-            errors.rejectValue("insuranceStartDate", "message.error.insurance_start_date.02");
-        } else if (common.checkStringEmptyOrNull(insuranceEndDate) == false) {
-            errors.rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
-        } else if (common.checkFormatDate(insuranceEndDate) == false) {
-            errors.rejectValue("insuranceEndDate", "message.error.insurance_end_date.02");
-        } else if (common.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate) == false) {
+    public void validateInsuranceStartDateAndEndDate(String insuranceStartDate, String insuranceEndDate, Errors
+            errors) {
+        if (common.checkStringEmptyOrNull(insuranceStartDate)
+                && common.checkStringEmptyOrNull(insuranceEndDate)
+                && common.checkValidInsuranceDate(insuranceStartDate, insuranceEndDate) == false) {
             errors.rejectValue("insuranceEndDate", "message.error.insurance_end_date.03");
         }
     }

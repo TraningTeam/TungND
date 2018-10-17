@@ -6,7 +6,6 @@ import com.repository.InsuranceRepository;
 import com.service.CompanyService;
 import com.service.InsuranceService;
 import com.service.UserService;
-import com.util.Common;
 import com.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,20 +61,20 @@ public class InsuranceServiceImp implements InsuranceService {
         String insuranceNumber = searchInsuranceRequest.getInsuranceNumber();
         String placeOfRegister = searchInsuranceRequest.getPlaceOfRegister();
         int currentPage = Integer.parseInt(currentPageString);
-        if (action.isEmpty() == true) {
+        if (action.isEmpty()) {
             companyIdSelected = companyList.get(0).getCompanyInternalId();
         }
-        if (action.equals(Constant.ACTION_SEARCH_TYPE.SORT.toString().toLowerCase()) == true
-                || action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase()) == true
-                || action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase()) == true) {
+        if (action.equals(Constant.ACTION_SEARCH_TYPE.SORT.toString().toLowerCase())
+                || action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase())
+                || action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase())) {
             companyIdSelected = (int) session.getAttribute(Constant.ATTRIBUTE_COMPANY_ID_SELECTED);
             userFullName = (String) session.getAttribute(Constant.ATTRIBUTE_USER_FULL_NAME);
             insuranceNumber = (String) session.getAttribute(Constant.ATTRIBUTE_INSURANCE_NUMBER);
             placeOfRegister = (String) session.getAttribute(Constant.ATTRIBUTE_PLACE_OF_REGISTER);
-            if (action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase()) == true) {
+            if (action.equals(Constant.ACTION_SEARCH_TYPE.BACK.toString().toLowerCase())) {
                 currentPage = (int) session.getAttribute(Constant.ATTRIBUTE_CURRENT_PAGE);
             }
-            if (action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase()) == true) {
+            if (action.equals(Constant.ACTION_SEARCH_TYPE.PAGING.toString().toLowerCase())) {
                 sortType = (String) session.getAttribute(Constant.ATTRIBUTE_SORT_TYPE);
             }
             searchInsuranceRequest.setUserFullName(userFullName);

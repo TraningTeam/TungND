@@ -1,7 +1,6 @@
 package com.model;
 
 import com.util.Common;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +54,7 @@ public class User {
         this.userName = registerInsuranceRequest.getUserName();
         this.password = registerInsuranceRequest.getPassword();
         this.userSexDivision = registerInsuranceRequest.getUserSexDivision().charAt(0);
-        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getBirthDate()) == true) {
+        if (common.checkStringEmptyOrNull(registerInsuranceRequest.getBirthDate())) {
             this.birthDate = common.convertStringToDate(registerInsuranceRequest.getBirthDate());
         }
     }

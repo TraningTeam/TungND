@@ -9,7 +9,6 @@ import com.util.Constant;
 import com.validate.InsuranceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -62,7 +61,7 @@ public class AddInsuranceController {
      * Get view of add insurance or get view of list insurance with method post
      *
      * @param registerInsuranceRequest form contains field to register
-     * @param errors            object contains all of error
+     * @param errors                   object contains all of error
      * @return redirect to url /listInsurance if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is false
      * Or view of add insurance if if <code> userValidation.validate(registerInsuranceRequest, errors) </code> is true
      * @throws ParseException if date field into {@code registerInsuranceRequest} convert by {@date format} is invalid
@@ -72,7 +71,7 @@ public class AddInsuranceController {
                                      Errors errors) throws ParseException {
         ModelAndView modelAndView = new ModelAndView(Constant.VIEW_ADD_INSURANCE);
         if (insuranceValidation.validate(registerInsuranceRequest, errors) == false) {
-            userService.saveInsurance(registerInsuranceRequest);
+            userService.saveUser(registerInsuranceRequest);
             return new ModelAndView("redirect:" + Constant.URL_LIST_INSURANCE);
         } else {
             List<Company> companyList = companyService.findAllCompany();
