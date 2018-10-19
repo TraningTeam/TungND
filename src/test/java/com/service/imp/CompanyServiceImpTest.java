@@ -25,6 +25,9 @@ public class CompanyServiceImpTest {
     @Mock
     CompanyRepository companyRepo;
 
+    /**
+     * Test find all company
+     */
     @Test
     public void testFindAllCompany() {
         //setup
@@ -38,6 +41,9 @@ public class CompanyServiceImpTest {
         assertEquals(actualCompanyList, companyList);
     }
 
+    /**
+     * Test find company by id
+     */
     @Test
     public void testFindCompanyById() {
         //setup
@@ -51,6 +57,9 @@ public class CompanyServiceImpTest {
         assertEquals(actualCompany, company);
     }
 
+    /**
+     * Test check exist of company by company name
+     */
     @Test
     public void testCheckExistCompanyByCompanyName1() {
         //setup
@@ -63,6 +72,9 @@ public class CompanyServiceImpTest {
         assertEquals(checkExistCompany, true);
     }
 
+    /**
+     * Test check exist of company by company name
+     */
     @Test
     public void testCheckExistCompanyByCompanyName2() {
         //setup

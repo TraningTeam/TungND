@@ -45,7 +45,9 @@ public class UserServiceImpTest {
     @Mock
     Common common;
 
-
+    /**
+     * Test find user
+     */
     @Test
     public void testFindUser() {
         //setup
@@ -60,6 +62,9 @@ public class UserServiceImpTest {
         assertEquals(actualUserList, userList);
     }
 
+    /**
+     * Test count total user
+     */
     @Test
     public void testCountTotalUser() {
         //setup
@@ -74,6 +79,9 @@ public class UserServiceImpTest {
         assertEquals(actualTotalUsert, totalUser);
     }
 
+    /**
+     * Test find user data
+     */
     @Test
     public void testFindUserDataToExport() {
         //setup
@@ -88,6 +96,9 @@ public class UserServiceImpTest {
         assertEquals(actualUserList, userList);
     }
 
+    /**
+     * Test check exist of user by user name
+     */
     @Test
     public void testCheckExistUserByUserName1() {
         //setup
@@ -101,6 +112,9 @@ public class UserServiceImpTest {
         assertEquals(actual, false);
     }
 
+    /**
+     * Test check exist of user by user name
+     */
     @Test
     public void testCheckExistUserByUserName2() {
         //setup
@@ -114,8 +128,11 @@ public class UserServiceImpTest {
         assertEquals(actual, true);
     }
 
+    /**
+     * Test save user
+     */
     @Test
-    public void testSaveInsurance1() {
+    public void testSaveUser1() {
         try {
             //setup
             RegisterInsuranceRequest registerInsuranceRequest = new RegisterInsuranceRequest();
@@ -132,8 +149,11 @@ public class UserServiceImpTest {
         verify(userRepo, times(1)).saveUser(anyObject());
     }
 
+    /**
+     * Test save user
+     */
     @Test
-    public void testSaveInsurance2() {
+    public void testSaveUser2() {
         try {
             //setup
             RegisterInsuranceRequest registerInsuranceRequest = new RegisterInsuranceRequest();
@@ -150,11 +170,14 @@ public class UserServiceImpTest {
         verify(userRepo, times(1)).saveUser(anyObject());
     }
 
+    /**
+     * Test save user
+     */
     @Test
-    public void testSaveInsurance3() {
+    public void testSaveUser3() {
         try {
             //setup
-            RegisterInsuranceRequest registerInsuranceRequest= new RegisterInsuranceRequest();
+            RegisterInsuranceRequest registerInsuranceRequest = new RegisterInsuranceRequest();
             registerInsuranceRequest.setUserSexDivision("1");
             registerInsuranceRequest.setCompanyFlag(false);
             when(common.convertStringToDate(registerInsuranceRequest.getInsuranceEndDate())).thenThrow(ParseException.class);
@@ -169,16 +192,19 @@ public class UserServiceImpTest {
         verify(userRepo, times(0)).saveUser(anyObject());
     }
 
+    /**
+     * Test get user data
+     */
     @Test
     public void testGetUserMapData() {
         //setup
         Map<String, Object> userMap = new HashMap<>();
-        userMap.put("next_page", 0);
-        userMap.put("page_list", new ArrayList<Integer>());
-        userMap.put("total_page", 0);
-        userMap.put("previous_page", 0);
-        userMap.put("user_list", new ArrayList<User>());
-        userMap.put("current_page", 1);
+        userMap.put(Constant.ATTRIBUTE_NEXT_PAGE, 0);
+        userMap.put(Constant.ATTRIBUTE_PAGE_LIST, new ArrayList<Integer>());
+        userMap.put(Constant.ATTRIBUTE_TOTAL_PAGE, 0);
+        userMap.put(Constant.ATTRIBUTE_PREVIOUS_PAGE, 0);
+        userMap.put(Constant.ATTRIBUTE_USER_LIST, new ArrayList<User>());
+        userMap.put(Constant.ATTRIBUTE_CURRENT_PAGE, 1);
         when(sut.findUser(1, "", "",
                 "", "", Constant.LIMIT_USER, 1)).thenReturn(new ArrayList<User>());
 

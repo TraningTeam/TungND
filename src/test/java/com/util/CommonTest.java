@@ -24,7 +24,7 @@ public class CommonTest {
     Common sut;
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging() {
@@ -39,7 +39,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging2() {
@@ -54,7 +54,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging3() {
@@ -69,7 +69,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging4() {
@@ -84,7 +84,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging5() {
@@ -99,7 +99,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry list paging
+     * Test get list paging
      */
     @Test
     public void testGetListPaging6() {
@@ -114,7 +114,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry next page
+     * Test get next page
      */
     @Test
     public void testGetNextPage1() {
@@ -128,7 +128,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry next page
+     * Test get next page
      */
     @Test
     public void testGetNextPage2() {
@@ -142,7 +142,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry next page
+     * Test get next page
      */
     @Test
     public void testGetNextPage3() {
@@ -156,7 +156,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry next page
+     * Test get next page
      */
     @Test
     public void testGetNextPage4() {
@@ -170,7 +170,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry previous page
+     * Test get previous page
      */
     @Test
     public void testGetPreviousPage() {
@@ -183,7 +183,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry previous page
+     * Test get start page
      */
     @Test
     public void testGetStartPage1() {
@@ -197,7 +197,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry previous page
+     * Test get start page
      */
     @Test
     public void testGetStartPage2() {
@@ -211,7 +211,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry previous page
+     * Test get start page
      */
     @Test
     public void testGetStartPage3() {
@@ -225,7 +225,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry previous page
+     * Test get start page
      */
     @Test
     public void testGetStartPage4() {
@@ -239,7 +239,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry end page
+     * Test get end page
      */
     @Test
     public void testGetEndPage1() {
@@ -254,7 +254,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry end page
+     * Test get end page
      */
     @Test
     public void testGetEndPage2() {
@@ -269,7 +269,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry end page
+     * Test get end page
      */
     @Test
     public void testGetEndPage3() {
@@ -284,7 +284,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry total page
+     * Test get total page
      */
     @Test
     public void testGetTotalPage1() {
@@ -298,7 +298,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry total page
+     * Test get total page
      */
     @Test
     public void testGetTotalPage2() {
@@ -312,7 +312,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry total page
+     * Test get total page
      */
     @Test
     public void testGetTotalPage3() {
@@ -326,7 +326,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry offet
+     * Test get offset
      */
     @Test
     public void testGetOffset1() {
@@ -339,7 +339,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry offet
+     * Test get offset
      */
     @Test
     public void testGetOffset2() {
@@ -352,7 +352,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry string null or empty or not
+     * Test check string null or empty or not
      */
     @Test
     public void testCheckStringEmptyOrNull1() {
@@ -365,7 +365,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry string null or empty or not
+     * Test check string null or empty or not
      */
     @Test
     public void testCheckStringEmptyOrNull2() {
@@ -378,7 +378,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry string null or empty or not
+     * Test check string null or empty or not
      */
     @Test
     public void testCheckStringEmptyOrNull3() {
@@ -391,7 +391,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance number regex
+     * Test check insurance number regex
      */
     @Test
     public void testCheckRegexInsuranceNumber1() {
@@ -404,7 +404,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance number regex
+     * Test check insurance number regex
      */
     @Test
     public void testCheckRegexInsuranceNumber2() {
@@ -417,7 +417,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance number regex
+     * Test check insurance number regex
      */
     @Test
     public void testCheckRegexInsuranceNumber3() {
@@ -430,7 +430,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance number regex
+     * Test check insurance number regex
      */
     @Test
     public void testCheckRegexInsuranceNumber4() {
@@ -443,7 +443,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry max length of string
+     * Test check max length of string
      */
     @Test
     public void testCheckMaxLength1() {
@@ -457,7 +457,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry max length of string
+     * Test check max length of string
      */
     @Test
     public void testCheckMaxLength2() {
@@ -471,7 +471,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry max length of string
+     * Test check max length of string
      */
     @Test
     public void testCheckMaxLength3() {
@@ -485,7 +485,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate1() {
@@ -499,7 +499,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate2() {
@@ -513,7 +513,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate3() {
@@ -527,7 +527,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate4() {
@@ -541,7 +541,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate5() {
@@ -555,7 +555,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate6() {
@@ -569,7 +569,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate7() {
@@ -583,7 +583,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate8() {
@@ -597,7 +597,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate9() {
@@ -611,7 +611,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate10() {
@@ -625,7 +625,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry insurance date is valid or not
+     * Test check insurance date is valid or not
      */
     @Test
     public void testCheckValidInsuranceDate11() {
@@ -639,7 +639,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry telephone regex
+     * Test check telephone regex
      */
     @Test
     public void testCheckRegexTelephone1() {
@@ -652,7 +652,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry telephone regex
+     * Test check telephone regex
      */
     @Test
     public void testCheckRegexTelephone2() {
@@ -665,7 +665,7 @@ public class CommonTest {
     }
 
     /**
-     * Veriry telephone regex
+     * Test check telephone regex
      */
     @Test
     public void testCheckRegexTelephone3() {
@@ -678,7 +678,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date to string
+     * Test check format date to string
      */
     @Test
     public void testFormatDate() {
@@ -691,7 +691,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date to string
+     * Test check format date to string
      */
     @Test
     public void testCheckFormatDate1() {
@@ -704,7 +704,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date to string
+     * Test check format string to date
      */
     @Test
     public void testCheckFormatDate2() {
@@ -717,7 +717,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date to string
+     * Test check format string to date
      */
     @Test
     public void testCheckFormatDate3() {
@@ -730,7 +730,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date to string
+     * Test check format string to date
      */
     @Test
     public void testCheckFormatDate4() {
@@ -743,77 +743,77 @@ public class CommonTest {
     }
 
     /**
-     * Verify format date of birthdate
+     * Test check format string to date
      */
     @Test
-    public void testCheckValidBirthdate1() {
+    public void testCheckValidBirthDate1() {
         //setup
         String dateString = "da";
         Date currentDate = Calendar.getInstance().getTime();
         boolean check = false;
 
         //verify
-        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthDate(dateString, currentDate), check);
     }
 
     /**
-     * Verify format date of birthdate
+     * Test check format date of birth date
      */
     @Test
-    public void testCheckValidBirthdate2() {
+    public void testCheckValidBirthDate2() {
         //setup
         String dateString = "01/31/2018";
         Date currentDate = Calendar.getInstance().getTime();
         boolean check = false;
 
         //verify
-        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthDate(dateString, currentDate), check);
     }
 
     /**
-     * Verify format date of birthdate
+     * Test check format date of birth date
      */
     @Test
-    public void testCheckValidBirthdate3() {
+    public void testCheckValidBirthDate3() {
         //setup
         String dateString = "29/02/2018";
         Date currentDate = Calendar.getInstance().getTime();
         boolean check = false;
 
         //verify
-        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthDate(dateString, currentDate), check);
     }
 
     /**
-     * Verify format date of birthdate
+     * Test check format date of birth date
      */
     @Test
-    public void testCheckValidBirthdate4() {
+    public void testCheckValidBirthDate4() {
         //setup
         String dateString = "30/11/3019";
         Date currentDate = Calendar.getInstance().getTime();
         boolean check = false;
 
         //verify
-        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthDate(dateString, currentDate), check);
     }
 
     /**
-     * Verify format date of birthdate
+     * Test check format date of birth date
      */
     @Test
-    public void testCheckValidBirthdate5() {
+    public void testCheckValidBirthDate5() {
         //setup
         String dateString = "20/01/1995";
         Date currentDate = Calendar.getInstance().getTime();
         boolean check = true;
 
         //verify
-        assertEquals(sut.checkValidBirthdate(dateString, currentDate), check);
+        assertEquals(sut.checkValidBirthDate(dateString, currentDate), check);
     }
 
     /**
-     * Verify convert string to date
+     * Test check convert string to date
      */
     @Test
     public void testConvertStringToDate1() {
@@ -832,7 +832,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify convert string to date
+     * Test check convert string to date
      */
     @Test
     public void testConvertStringToDate2() {
@@ -851,7 +851,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify convert string to date
+     * Test check convert string to date
      *
      * @throws ParseException if convert date string to date throws exception
      */
@@ -866,7 +866,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify format text
+     * Test check format text
      */
     @Test
     public void testFormatText() {
@@ -879,7 +879,7 @@ public class CommonTest {
     }
 
     /**
-     * Verify unaccent text
+     * Test check unaccent text
      */
     @Test
     public void testUnAccent() {
@@ -891,36 +891,9 @@ public class CommonTest {
         assertEquals(sut.unAccent(text), result);
     }
 
-    /**
-     * Verify compare two string
-     */
-    @Test
-    public void testCompareTwoString1() {
-        //setup
-        String text1 = "nguyễn phong";
-        String text2 = "nguyen tung";
-        boolean check = false;
-
-        //verify
-        assertEquals(sut.compareString(text1, text2), check);
-    }
 
     /**
-     * Verify compare two string
-     */
-    @Test
-    public void testCompareTwoString2() {
-        //setup
-        String text1 = "nguyễn tung";
-        String text2 = "nguyễn tung";
-        boolean check = true;
-
-        //verify
-        assertEquals(sut.compareString(text1, text2), check);
-    }
-
-    /**
-     * Verify set format valid date
+     * Test check set format valid date
      */
     @Test
     public void testSetFormatValidDate() {
