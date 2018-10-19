@@ -218,7 +218,7 @@ public class Common {
      * @return true if {@code birthDate} is less than or equal to {@code currentDate},
      * And false if {@code birthDate} is greater than {@code currentDate}
      */
-    public boolean checkValidBirthdate(String birthDate, Date currentDate) {
+    public boolean checkValidBirthDate(String birthDate, Date currentDate) {
         DateFormat dateFormat = setFormatValidDate();
         boolean check;
         try {
@@ -278,17 +278,6 @@ public class Common {
         String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d");
-    }
-
-    /**
-     * Compare two string
-     *
-     * @param str1 string first
-     * @param str2 string second
-     * @return true if {@code str1} is equal to str2 and false if {@code str1} is not equal to str2
-     */
-    public boolean compareString(String str1, String str2) {
-        return str1.equals(str2);
     }
 
     /**

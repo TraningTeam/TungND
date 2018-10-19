@@ -32,13 +32,13 @@ public class ListInsuranceController {
      */
     @GetMapping(Constant.URL_LIST_INSURANCE)
     public ModelAndView listInsurance(@RequestParam(defaultValue = "") String action,
-                                      @RequestParam(value = Constant.ATTRIBUTE_COMPANY_ID_SELECTED, defaultValue = "1") String companyIdSelectedStr,
+                                      @RequestParam(value = Constant.ATTRIBUTE_COMPANY_ID_SELECTED, defaultValue = "1") String companyIdSelectedString,
                                       @ModelAttribute SearchInsuranceRequest searchInsuranceRequest,
                                       @RequestParam(value = Constant.ATTRIBUTE_SORT_TYPE, defaultValue = "ASC") String sortType,
                                       @RequestParam(value = Constant.ATTRIBUTE_CURRENT_PAGE, defaultValue = "1") String currentPageString,
                                       HttpSession session) {
         ModelAndView modelAndView = new ModelAndView(Constant.VIEW_LIST_INSURANCE);
-        Map<String, Object> insuranceMap = insuranceService.getInsuranceMapData(action, companyIdSelectedStr, searchInsuranceRequest, sortType, currentPageString, session);
+        Map<String, Object> insuranceMap = insuranceService.getInsuranceMapData(action, companyIdSelectedString, searchInsuranceRequest, sortType, currentPageString, session);
         Map<String, Object> userMap = (Map<String, Object>) insuranceMap.get(Constant.ATTRIBUTE_USER_MAP);
         if (userMap != null) {
             modelAndView.addObject(Constant.ATTRIBUTE_CURRENT_PAGE, userMap.get(Constant.ATTRIBUTE_CURRENT_PAGE));

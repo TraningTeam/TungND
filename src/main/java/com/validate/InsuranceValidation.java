@@ -124,7 +124,7 @@ public class InsuranceValidation {
                 errors.rejectValue("password", "message.error.password.02");
             }
             if (common.checkStringEmptyOrNull(rePassword)
-                    && common.compareString(password, rePassword) == false) {
+                    && password.equals(rePassword) == false) {
                 errors.rejectValue("rePassword", "message.error.re_password.01");
             }
         }
@@ -139,7 +139,7 @@ public class InsuranceValidation {
     public void validateBirthDate(String birthDate, Errors errors) {
         if (common.checkStringEmptyOrNull(birthDate) &&
                 (common.checkFormatDate(birthDate) == false
-                        || common.checkValidBirthdate(birthDate, Calendar.getInstance().getTime()) == false)) {
+                        || common.checkValidBirthDate(birthDate, Calendar.getInstance().getTime()) == false)) {
             errors.rejectValue("birthDate", "message.error.birth_date.01");
         }
     }

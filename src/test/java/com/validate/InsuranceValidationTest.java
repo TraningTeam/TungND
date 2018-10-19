@@ -17,6 +17,7 @@ import java.util.Calendar;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,7 +44,7 @@ public class InsuranceValidationTest {
     Errors errors;
 
     /**
-     *
+     * Test validate of insurance number
      */
     @Test
     public void testValidateInsuranceNumber1() {
@@ -57,6 +58,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("insuranceNumber", "message.error.insurance_number.01");
     }
 
+    /**
+     * Test validate of insurance number
+     */
     @Test
     public void testValidateInsuranceNumber2() {
         //setup
@@ -67,11 +71,13 @@ public class InsuranceValidationTest {
         sut.validateInsuranceNumber(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.01");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.01");
         verify(errors, times(1)).rejectValue("insuranceNumber", "message.error.insurance_number.02");
     }
 
-
+    /**
+     * Test validate of insurance number
+     */
     @Test
     public void testValidateInsuranceNumber3() {
         //setup
@@ -83,11 +89,14 @@ public class InsuranceValidationTest {
         sut.validateInsuranceNumber(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.01");
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.02");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.01");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.02");
         verify(errors, times(1)).rejectValue("insuranceNumber", "message.error.insurance_number.03");
     }
 
+    /**
+     * Test validate of insurance number
+     */
     @Test
     public void testValidateInsuranceNumber4() {
         //setup
@@ -99,11 +108,14 @@ public class InsuranceValidationTest {
         sut.validateInsuranceNumber(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.01");
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.02");
-        verify(errors, times(0)).rejectValue("insuranceNumber", "message.error.insurance_number.03");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.01");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.02");
+        verify(errors, never()).rejectValue("insuranceNumber", "message.error.insurance_number.03");
     }
 
+    /**
+     * Test validate of user full name
+     */
     @Test
     public void testValidateUserFullName1() {
         //setup
@@ -116,6 +128,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("userFullName", "message.error.user_full_name.01");
     }
 
+    /**
+     * Test validate of user full name
+     */
     @Test
     public void testValidateUserFullName2() {
         //setup
@@ -126,10 +141,13 @@ public class InsuranceValidationTest {
         sut.validateUserFullName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("userFullName", "message.error.user_full_name.01");
+        verify(errors, never()).rejectValue("userFullName", "message.error.user_full_name.01");
         verify(errors, times(1)).rejectValue("userFullName", "message.error.user_full_name.02");
     }
 
+    /**
+     * Test validate of user full name
+     */
     @Test
     public void testValidateUserFullName3() {
         //setup
@@ -140,10 +158,13 @@ public class InsuranceValidationTest {
         sut.validateUserFullName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("userFullName", "message.error.user_full_name.01");
-        verify(errors, times(0)).rejectValue("userFullName", "message.error.user_full_name.02");
+        verify(errors, never()).rejectValue("userFullName", "message.error.user_full_name.01");
+        verify(errors, never()).rejectValue("userFullName", "message.error.user_full_name.02");
     }
 
+    /**
+     * Test validate of user name
+     */
     @Test
     public void testValidateUserName1() {
         //setup
@@ -156,6 +177,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("userName", "message.error.username.01");
     }
 
+    /**
+     * Test validate of user name
+     */
     @Test
     public void testValidateUserName2() {
         //setup
@@ -166,11 +190,13 @@ public class InsuranceValidationTest {
         sut.validateUserName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.01");
+        verify(errors, never()).rejectValue("userName", "message.error.username.01");
         verify(errors, times(1)).rejectValue("userName", "message.error.username.02");
     }
 
-
+    /**
+     * Test validate of user name
+     */
     @Test
     public void testValidateUserName3() {
         //setup
@@ -182,11 +208,14 @@ public class InsuranceValidationTest {
         sut.validateUserName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.01");
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.02");
+        verify(errors, never()).rejectValue("userName", "message.error.username.01");
+        verify(errors, never()).rejectValue("userName", "message.error.username.02");
         verify(errors, times(1)).rejectValue("userName", "message.error.username.03");
     }
 
+    /**
+     * Test validate of user name
+     */
     @Test
     public void testValidateUserName4() {
         //setup
@@ -198,11 +227,14 @@ public class InsuranceValidationTest {
         sut.validateUserName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.01");
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.02");
-        verify(errors, times(0)).rejectValue("userName", "message.error.username.03");
+        verify(errors, never()).rejectValue("userName", "message.error.username.01");
+        verify(errors, never()).rejectValue("userName", "message.error.username.02");
+        verify(errors, never()).rejectValue("userName", "message.error.username.03");
     }
 
+    /**
+     * Test validate of password and re password
+     */
     @Test
     public void testValidatePasswordAndRePassword1() {
         //setup
@@ -215,6 +247,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("password", "message.error.password.01");
     }
 
+    /**
+     * Test validate of password and re password
+     */
     @Test
     public void testValidatePasswordAndRePassword2() {
         //setup
@@ -229,70 +264,60 @@ public class InsuranceValidationTest {
             }
         });
         when(common.checkMaxLength(anyString(), anyInt())).thenReturn(false);
-        when(common.compareString(anyString(), anyString())).thenReturn(false);
 
         //exercise
         sut.validatePasswordAndRePassword("true", "false", errors);
 
         //verify
         verify(errors, times(1)).rejectValue("password", "message.error.password.02");
-        verify(errors, times(0)).rejectValue("rePassword", "message.error.re_password.01");
+        verify(errors, never()).rejectValue("rePassword", "message.error.re_password.01");
     }
 
+    /**
+     * Test validate of password and re password
+     */
     @Test
     public void testValidatePasswordAndRePassword3() {
         //setup
-        when(common.checkStringEmptyOrNull(anyString())).thenAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object argument = invocation.getArguments()[0];
-                if (argument.equals("true")) {
-                    return true;
-                }
-                return false;
-            }
-        });
+        when(common.checkStringEmptyOrNull("true")).thenReturn(true);
+        when(common.checkStringEmptyOrNull("false")).thenReturn(true);
         when(common.checkMaxLength(anyString(), anyInt())).thenReturn(false);
-        when(common.compareString(anyString(), anyString())).thenReturn(false);
 
         //exercise
-        sut.validatePasswordAndRePassword("true", "true", errors);
+        sut.validatePasswordAndRePassword("true", "false", errors);
 
         //verify
         verify(errors, times(1)).rejectValue("password", "message.error.password.02");
         verify(errors, times(1)).rejectValue("rePassword", "message.error.re_password.01");
     }
 
+    /**
+     * Test validate of password and re password
+     */
     @Test
     public void testValidatePasswordAndRePassword4() {
         //setup
-        when(common.checkStringEmptyOrNull(anyString())).thenAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object argument = invocation.getArguments()[0];
-                if (argument.equals("true")) {
-                    return true;
-                }
-                return false;
-            }
-        });
+        when(common.checkStringEmptyOrNull("true")).thenReturn(true);
+        when(common.checkStringEmptyOrNull("false")).thenReturn(true);
         when(common.checkMaxLength(anyString(), anyInt())).thenReturn(true);
-        when(common.compareString(anyString(), anyString())).thenReturn(false);
 
         //exercise
-        sut.validatePasswordAndRePassword("true", "true", errors);
+        sut.validatePasswordAndRePassword("true", "false", errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("password", "message.error.password.02");
+        verify(errors, never()).rejectValue("password", "message.error.password.02");
         verify(errors, times(1)).rejectValue("rePassword", "message.error.re_password.01");
     }
 
+    /**
+     * Test validate of birth date
+     */
     @Test
     public void testValidateBirthDate1() {
         //setup
         when(common.checkStringEmptyOrNull(anyString())).thenReturn(true);
         when(common.checkFormatDate(anyString())).thenReturn(false);
-        when(common.checkValidBirthdate("", Calendar.getInstance().getTime())).thenReturn(false);
+        when(common.checkValidBirthDate("", Calendar.getInstance().getTime())).thenReturn(false);
 
         //exercise
         sut.validateBirthDate(anyString(), errors);
@@ -302,20 +327,26 @@ public class InsuranceValidationTest {
 
     }
 
+    /**
+     * Test validate of birth date
+     */
     @Test
     public void testValidateBirthDate2() {
         //setup
         when(common.checkStringEmptyOrNull(anyString())).thenReturn(false);
-        when(common.checkFormatDate(anyString())).thenReturn(false);
-        when(common.checkValidBirthdate("", Calendar.getInstance().getTime())).thenReturn(false);
+        when(common.checkFormatDate(anyString())).thenReturn(true);
+        when(common.checkValidBirthDate("", Calendar.getInstance().getTime())).thenReturn(false);
 
         //exercise
         sut.validateBirthDate(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("birthDate", "message.error.birth_date.01");
+        verify(errors, never()).rejectValue("birthDate", "message.error.birth_date.01");
     }
 
+    /**
+     * Test validate of company name
+     */
     @Test
     public void testValidateCompanyName1() {
         //setup
@@ -328,6 +359,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("companyName", "message.error.company_name.01");
     }
 
+    /**
+     * Test validate of company name
+     */
     @Test
     public void testValidateCompanyName2() {
         //setup
@@ -338,10 +372,13 @@ public class InsuranceValidationTest {
         sut.validateCompanyName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyName", "message.error.company_name.01");
+        verify(errors, never()).rejectValue("companyName", "message.error.company_name.01");
         verify(errors, times(1)).rejectValue("companyName", "message.error.company_name.02");
     }
 
+    /**
+     * Test validate of company name
+     */
     @Test
     public void testValidateCompanyName3() {
         //setup
@@ -353,11 +390,14 @@ public class InsuranceValidationTest {
         sut.validateCompanyName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyName", "message.error.company_name.01");
-        verify(errors, times(0)).rejectValue("companyName", "message.error.company_name.02");
+        verify(errors, never()).rejectValue("companyName", "message.error.company_name.01");
+        verify(errors, never()).rejectValue("companyName", "message.error.company_name.02");
         verify(errors, times(1)).rejectValue("companyName", "message.error.company_name.03");
     }
 
+    /**
+     * Test validate of company address
+     */
     @Test
     public void testValidateCompanyAddress1() {
         //setup
@@ -370,6 +410,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("companyAddress", "message.error.company_address.01");
     }
 
+    /**
+     * Test validate of company address
+     */
     @Test
     public void testValidateCompanyAddress2() {
         //setup
@@ -380,10 +423,13 @@ public class InsuranceValidationTest {
         sut.validateCompanyAddress(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyAddress", "message.error.company_address.01");
+        verify(errors, never()).rejectValue("companyAddress", "message.error.company_address.01");
         verify(errors, times(1)).rejectValue("companyAddress", "message.error.company_address.02");
     }
 
+    /**
+     * Test validate of company address
+     */
     @Test
     public void testValidateCompanyAddress3() {
         //setup
@@ -394,10 +440,13 @@ public class InsuranceValidationTest {
         sut.validateCompanyName(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyAddress", "message.error.company_address.01");
-        verify(errors, times(0)).rejectValue("companyAddress", "message.error.company_address.02");
+        verify(errors, never()).rejectValue("companyAddress", "message.error.company_address.01");
+        verify(errors, never()).rejectValue("companyAddress", "message.error.company_address.02");
     }
 
+    /**
+     * Test validate of company email
+     */
     @Test
     public void testValidateCompanyEmail1() {
         //setup
@@ -408,9 +457,12 @@ public class InsuranceValidationTest {
         sut.validateCompanyEmail(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyEmail", "message.error.company_email.01");
+        verify(errors, never()).rejectValue("companyEmail", "message.error.company_email.01");
     }
 
+    /**
+     * Test validate of company email
+     */
     @Test
     public void testValidateCompanyEmail2() {
         //setup
@@ -424,6 +476,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("companyEmail", "message.error.company_email.01");
     }
 
+    /**
+     * Test validate of company telephone
+     */
     @Test
     public void testValidateCompanyTelephone1() {
         //setup
@@ -434,9 +489,12 @@ public class InsuranceValidationTest {
         sut.validateCompanyTelephone(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("companyTelephone", "message.error.company_telephone.01");
+        verify(errors, never()).rejectValue("companyTelephone", "message.error.company_telephone.01");
     }
 
+    /**
+     * Test validate of company telephone
+     */
     @Test
     public void testValidateCompanyTelephone2() {
         //setup
@@ -450,6 +508,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("companyTelephone", "message.error.company_telephone.01");
     }
 
+    /**
+     * Test validate of place of register
+     */
     @Test
     public void testValidatePlaceOfRegister1() {
         //setup
@@ -462,6 +523,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("placeOfRegister", "message.error.place_of_register.01");
     }
 
+    /**
+     * Test validate of place of register
+     */
     @Test
     public void testValidatePlaceOfRegister2() {
         //setup
@@ -472,10 +536,13 @@ public class InsuranceValidationTest {
         sut.validatePlaceOfRegister(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("placeOfRegister", "message.error.place_of_register.01");
+        verify(errors, never()).rejectValue("placeOfRegister", "message.error.place_of_register.01");
         verify(errors, times(1)).rejectValue("placeOfRegister", "message.error.place_of_register.02");
     }
 
+    /**
+     * Test validate of place of register
+     */
     @Test
     public void testValidatePlaceOfRegister3() {
         //setup
@@ -486,11 +553,13 @@ public class InsuranceValidationTest {
         sut.validatePlaceOfRegister(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("placeOfRegister", "message.error.place_of_register.01");
-        verify(errors, times(0)).rejectValue("placeOfRegister", "message.error.place_of_register.02");
+        verify(errors, never()).rejectValue("placeOfRegister", "message.error.place_of_register.01");
+        verify(errors, never()).rejectValue("placeOfRegister", "message.error.place_of_register.02");
     }
 
-
+    /**
+     * Test validate of insurance start date
+     */
     @Test
     public void testValidateInsuranceStartDate1() {
         //setup
@@ -503,6 +572,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
     }
 
+    /**
+     * Test validate of insurance start date
+     */
     @Test
     public void testValidateInsuranceStartDate2() {
         //setup
@@ -513,10 +585,13 @@ public class InsuranceValidationTest {
         sut.validateInsuranceStartDate(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
+        verify(errors, never()).rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
         verify(errors, times(1)).rejectValue("insuranceStartDate", "message.error.insurance_start_date.02");
     }
 
+    /**
+     * Test validate of insurance start date
+     */
     @Test
     public void testValidateInsuranceStartDate3() {
         //setup
@@ -527,10 +602,13 @@ public class InsuranceValidationTest {
         sut.validateInsuranceStartDate(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
-        verify(errors, times(0)).rejectValue("insuranceStartDate", "message.error.insurance_start_date.02");
+        verify(errors, never()).rejectValue("insuranceStartDate", "message.error.insurance_start_date.01");
+        verify(errors, never()).rejectValue("insuranceStartDate", "message.error.insurance_start_date.02");
     }
 
+    /**
+     * Test validate of insurance end date
+     */
     @Test
     public void testValidateInsuranceEndDate1() {
         //setup
@@ -543,6 +621,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
     }
 
+    /**
+     * Test validate of insurance end date
+     */
     @Test
     public void testValidateInsuranceEndDate2() {
         //setup
@@ -553,10 +634,13 @@ public class InsuranceValidationTest {
         sut.validateInsuranceEndDate(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
+        verify(errors, never()).rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
         verify(errors, times(1)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.02");
     }
 
+    /**
+     * Test validate of insurance end date
+     */
     @Test
     public void testValidateInsuranceEndDate3() {
         //setup
@@ -567,10 +651,13 @@ public class InsuranceValidationTest {
         sut.validateInsuranceEndDate(anyString(), errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
-        verify(errors, times(0)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.02");
+        verify(errors, never()).rejectValue("insuranceEndDate", "message.error.insurance_end_date.01");
+        verify(errors, never()).rejectValue("insuranceEndDate", "message.error.insurance_end_date.02");
     }
 
+    /**
+     * Test validate of insurance start date and insurance end date
+     */
     @Test
     public void testInsuranceStartDateAndEndDate1() {
         //setup
@@ -584,6 +671,9 @@ public class InsuranceValidationTest {
         verify(errors, times(1)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.03");
     }
 
+    /**
+     * Test validate of insurance start date and insurance end date
+     */
     @Test
     public void testInsuranceStartDateAndEndDate2() {
         //setup
@@ -594,7 +684,7 @@ public class InsuranceValidationTest {
         sut.validateInsuranceStartDateAndEndDate(anyString(), "", errors);
 
         //verify
-        verify(errors, times(0)).rejectValue("insuranceEndDate", "message.error.insurance_end_date.03");
+        verify(errors, never()).rejectValue("insuranceEndDate", "message.error.insurance_end_date.03");
     }
 
 }

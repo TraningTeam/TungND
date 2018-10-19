@@ -44,19 +44,19 @@ public class InsuranceServiceImp implements InsuranceService {
     /**
      * Get insurance map data
      *
-     * @param action                 action of url
-     * @param companyIdSelectedStr   company id is selected by user
-     * @param searchInsuranceRequest object contains data of form
-     * @param sortType               sort type is selected by user
-     * @param currentPageString      current page is selected by the user
-     * @param session                object to save data submit
+     * @param action                  action of url
+     * @param companyIdSelectedString company id is selected by user
+     * @param searchInsuranceRequest  object contains data of form
+     * @param sortType                sort type is selected by user
+     * @param currentPageString       current page is selected by the user
+     * @param session                 object to save data submit
      * @return a map insurance data
      */
     @Override
-    public Map<String, Object> getInsuranceMapData(String action, String companyIdSelectedStr, SearchInsuranceRequest searchInsuranceRequest, String sortType, String currentPageString, HttpSession session) {
+    public Map<String, Object> getInsuranceMapData(String action, String companyIdSelectedString, SearchInsuranceRequest searchInsuranceRequest, String sortType, String currentPageString, HttpSession session) {
         Map<String, Object> insuranceMap = new HashMap<>();
         List<Company> companyList = companyService.findAllCompany();
-        int companyIdSelected = Integer.parseInt(companyIdSelectedStr);
+        int companyIdSelected = Integer.parseInt(companyIdSelectedString);
         String userFullName = searchInsuranceRequest.getUserFullName();
         String insuranceNumber = searchInsuranceRequest.getInsuranceNumber();
         String placeOfRegister = searchInsuranceRequest.getPlaceOfRegister();
